@@ -1,0 +1,22 @@
+# First rule
+GET http://localhost.com/api/v1/products
+
+# Second rule
+GET https://localhost:3000/?q=foo
+
+# Third rule
+GET https://google.com
+
+# Headers
+foo: bar
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+    "foo": {
+        "bar": "baz",
+        "fizz": "buzz"
+    }
+}
+
+# vim: ft=http

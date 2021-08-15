@@ -1,0 +1,47 @@
+{
+  "name": "tree-sitter-http",
+  "version": "0.1.0",
+  "description": "Treesitter parser for http files",
+  "main": "bindings/node",
+  "scripts": {
+    "gen": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "clean": "rm -r bindings; rm -r src; rm binding.gyp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NTBBloodbath/tree-sitter-http.git"
+  },
+  "keywords": [
+    "treesitter",
+    "parser",
+    "http"
+  ],
+  "author": "NTBBloodbath",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NTBBloodbath/tree-sitter-http/issues"
+  },
+  "homepage": "https://github.com/NTBBloodbath/tree-sitter-http#readme",
+  "dependencies": {
+    "nan": "^2.14.2"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source_file.http",
+      "file-types": [
+        "http"
+      ],
+      "theme": {
+        "keyword": "blue",
+        "string": "green",
+        "error": "red",
+        "comment": "grey"
+      }
+    }
+  ]
+}
