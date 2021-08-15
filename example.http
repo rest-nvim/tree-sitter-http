@@ -9,8 +9,8 @@ GET https://google.com
 
 # Headers
 foo: bar
-Content-Type: application/json
-Authorization: Bearer <token>
+bar: baz
+# Content-Type: application/json
 
 {
     "foo": {

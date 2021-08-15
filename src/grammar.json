@@ -17,6 +17,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "header"
+        },
+        {
+          "type": "SYMBOL",
           "name": "json_body"
         }
       ]
@@ -31,6 +35,10 @@
             "type": "SYMBOL",
             "name": "method"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
         },
         {
           "type": "FIELD",
@@ -57,9 +65,22 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "name"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "name"
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              }
+            ]
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
         },
         {
           "type": "FIELD",
@@ -72,21 +93,12 @@
       ]
     },
     "name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[-A-Za-z]+"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "[A-Za-z]+"
     },
     "value": {
       "type": "PATTERN",
-      "value": "(\\w+\\W\\w+)|(\\w+\\s\\w+)"
+      "value": "(\\w+\\W\\w+)"
     },
     "json_body": {
       "type": "SEQ",
@@ -152,9 +164,16 @@
           },
           {
             "type": "PATTERN",
-            "value": ".*"
+            "value": "[^\\r?\\n]*"
           }
         ]
+      }
+    },
+    "_whitespace": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[\\t\\v ]"
       }
     }
   },
@@ -164,16 +183,7 @@
       "name": "comment"
     }
   ],
-  "conflicts": [
-    [
-      "method",
-      "url"
-    ],
-    [
-      "name",
-      "value"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],
