@@ -2,7 +2,7 @@
 GET http://localhost.com/api/v1/products
 
 # Second rule
-GET https://localhost:3000/?q=foo
+GET http://localhost:3000/?q=[a,b,c]&l=Rust
 
 # Third rule
 GET https://google.com
@@ -10,13 +10,11 @@ GET https://google.com
 # Headers
 foo: bar
 bar: baz
-# Content-Type: application/json
+Content-Type: application/json
+Authentication: Bearer <token>
 
 {
-    "foo": {
-        "bar": "baz",
-        "fizz": "buzz"
-    }
+    "foo": [ "fizz", "buzz" ]
 }
 
 # vim: ft=http

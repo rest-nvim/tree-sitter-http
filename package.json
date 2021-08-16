@@ -36,9 +36,9 @@
       "file-types": [
         "http"
       ],
+      "injection-regex": "{",
       "theme": {
         "keyword": "blue",
-        "string": "green",
         "error": "red",
         "comment": "grey"
       }

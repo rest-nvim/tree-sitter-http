@@ -1,9 +1,13 @@
 ; Display errors
-(ERROR) @TSError
-
-(request
-  method: (method) @TSConstant
-  url: (url) @TSURI)
+(ERROR) @error
 
 ; Comments
-(comment) @TSComment
+(comment) @comment
+
+(request
+  method: (method) @keyword
+  url: (url) @TSURI)
+
+(header
+  name: (name) @constant
+  value: (value))

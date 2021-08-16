@@ -22,6 +22,10 @@
         {
           "type": "SYMBOL",
           "name": "json_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
         }
       ]
     },
@@ -94,11 +98,11 @@
     },
     "name": {
       "type": "PATTERN",
-      "value": "[A-Za-z]+"
+      "value": "[A-Za-z-]+"
     },
     "value": {
       "type": "PATTERN",
-      "value": "(\\w+\\W\\w+)"
+      "value": "[^\\n]+"
     },
     "json_body": {
       "type": "SEQ",
@@ -110,6 +114,10 @@
             "type": "SYMBOL",
             "name": "json_body_start"
           }
+        },
+        {
+          "type": "PATTERN",
+          "value": ".*"
         },
         {
           "type": "FIELD",
@@ -164,7 +172,7 @@
           },
           {
             "type": "PATTERN",
-            "value": "[^\\r?\\n]*"
+            "value": ".*"
           }
         ]
       }
@@ -179,8 +187,8 @@
   },
   "extras": [
     {
-      "type": "SYMBOL",
-      "name": "comment"
+      "type": "PATTERN",
+      "value": "\\s"
     }
   ],
   "conflicts": [],
