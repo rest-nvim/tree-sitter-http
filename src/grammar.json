@@ -108,55 +108,250 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "start",
+          "type": "TOKEN",
           "content": {
-            "type": "SYMBOL",
-            "name": "json_body_start"
+            "type": "PATTERN",
+            "value": "\\{\\s+"
           }
         },
         {
-          "type": "PATTERN",
-          "value": ".*"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "json_pair"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "FIELD",
-          "name": "end",
+          "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "json_body_end"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": ","
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "json_pair"
+              }
+            ]
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "}"
           }
         }
       ]
     },
-    "json_body_start": {
+    "json_string_content": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "{"
-          },
-          {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[\\w\\s]+"
       }
     },
-    "json_body_end": {
+    "json_array": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "["
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "array_content",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_json_value"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": ","
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "array_content",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_json_value"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "]"
+          }
+        }
+      ]
+    },
+    "json_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\""
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "string_content",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "json_string_content"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\""
+          }
+        }
+      ]
+    },
+    "json_number": {
       "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d+(\\.\\d+)?|\\.\\d+"
+      }
+    },
+    "_json_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "json_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_array"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_body"
+        }
+      ]
+    },
+    "json_pair": {
+      "type": "PREC_LEFT",
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "}"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_whitespace"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "\""
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "key",
+            "content": {
+              "type": "SYMBOL",
+              "name": "json_string_content"
+            }
+          },
+          {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "\"\\s*:"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "value",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_json_value"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "STRING",
+                    "value": ","
+                  }
+                },
+                {
+                  "type": "FIELD",
+                  "name": "value",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_json_value"
+                  }
+                }
+              ]
+            }
           }
         ]
       }
