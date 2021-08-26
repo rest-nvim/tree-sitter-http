@@ -46,11 +46,6 @@
     }
   },
   {
-    "type": "interpolation",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "json_array",
     "named": true,
     "fields": {
@@ -181,10 +176,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "interpolation",
-          "named": true
-        },
         {
           "type": "json_escape_sequence",
           "named": true
@@ -318,15 +309,7 @@
     "named": true
   },
   {
-    "type": "{{",
-    "named": false
-  },
-  {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "}}",
     "named": false
   }
 ]
