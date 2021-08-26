@@ -25,16 +25,63 @@ module.exports = grammar({
 
     value: (_) => /[^\n]+/,
 
-    // NOTE: we should remove this '/.*/' later, it isn't safe and doesn't cover our needs
-    json_body: ($) =>
-      seq(
-        field("start", $.json_body_start),
-        /.*/,
-        field("end", $.json_body_end)
-      ),
+	json_body: ($) => seq(
+		token(/\{\s+/),
+		optional($.json_pair),
+		repeat(
+			seq(
+				token(","),
+				$.json_pair,
+			)
+		),
+		token("}"),
+	),
 
-    json_body_start: (_) => token(seq("{", /\r?\n/)),
-    json_body_end: (_) => token(seq("}", /\r?\n/)),
+	json_string_content: (_) => token(/[\w\s]+/),
+
+	json_array: ($) =>
+		seq(
+			token("["),
+			field("array_content", optional($._json_value)),
+			repeat(
+				seq(
+					token(","),
+					field("array_content", $._json_value),
+				),
+			),
+			token("]"),
+		),
+
+	json_string: ($) =>
+		seq(
+			token('"'),
+			field("string_content", optional($.json_string_content)),
+			token('"'),
+		),
+
+	json_number: ($) => token(/\d+(\.\d+)?|\.\d+/),
+
+	_json_value: ($) =>
+		choice(
+			$.json_string,
+			$.json_number,
+			$.json_array,
+			$.json_body,
+		),
+
+	json_pair: ($) => prec.left(0, seq(
+		optional($._whitespace),
+		token('"'),
+		field("key", $.json_string_content),
+		token(/"\s*:/),
+		field("value", $._json_value),
+		repeat(
+			seq(
+				token(","),
+				field("value", $._json_value),
+			)
+		)
+	)),
 
     comment: (_) => token(seq("#", /.*/)),
 

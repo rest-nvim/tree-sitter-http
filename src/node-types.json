@@ -30,25 +30,96 @@
     }
   },
   {
-    "type": "json_body",
+    "type": "json_array",
     "named": true,
     "fields": {
-      "end": {
+      "array_content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "json_array",
+            "named": true
+          },
+          {
+            "type": "json_body",
+            "named": true
+          },
+          {
+            "type": "json_number",
+            "named": true
+          },
+          {
+            "type": "json_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "json_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "json_pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "json_pair",
+    "named": true,
+    "fields": {
+      "key": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "json_body_end",
+            "type": "json_string_content",
             "named": true
           }
         ]
       },
-      "start": {
-        "multiple": false,
+      "value": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "json_body_start",
+            "type": "json_array",
+            "named": true
+          },
+          {
+            "type": "json_body",
+            "named": true
+          },
+          {
+            "type": "json_number",
+            "named": true
+          },
+          {
+            "type": "json_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "json_string",
+    "named": true,
+    "fields": {
+      "string_content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "json_string_content",
             "named": true
           }
         ]
@@ -109,7 +180,23 @@
     }
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {
@@ -117,11 +204,11 @@
     "named": true
   },
   {
-    "type": "json_body_end",
+    "type": "json_number",
     "named": true
   },
   {
-    "type": "json_body_start",
+    "type": "json_string_content",
     "named": true
   },
   {
@@ -139,5 +226,9 @@
   {
     "type": "value",
     "named": true
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]
