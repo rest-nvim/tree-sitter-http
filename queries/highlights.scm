@@ -27,3 +27,7 @@
 (json_escape_sequence) @TSStringEscape
 
 (json_body) @keyword
+
+; rest.nvim Neovim plugin specific features
+(external_body
+  json_file: (json_file) @TSURI) @keyword
