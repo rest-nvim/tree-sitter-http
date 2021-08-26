@@ -46,6 +46,14 @@
             "named": true
           },
           {
+            "type": "json_boolean",
+            "named": true
+          },
+          {
+            "type": "json_null",
+            "named": true
+          },
+          {
             "type": "json_number",
             "named": true
           },
@@ -71,6 +79,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "json_boolean",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "json_pair",
@@ -99,6 +112,14 @@
             "named": true
           },
           {
+            "type": "json_boolean",
+            "named": true
+          },
+          {
+            "type": "json_null",
+            "named": true
+          },
+          {
             "type": "json_number",
             "named": true
           },
@@ -124,6 +145,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "json_string_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "json_escape_sequence",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -204,11 +240,19 @@
     "named": true
   },
   {
-    "type": "json_number",
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "json_escape_sequence",
     "named": true
   },
   {
-    "type": "json_string_content",
+    "type": "json_null",
+    "named": true
+  },
+  {
+    "type": "json_number",
     "named": true
   },
   {
@@ -218,6 +262,10 @@
   {
     "type": "name",
     "named": true
+  },
+  {
+    "type": "true",
+    "named": false
   },
   {
     "type": "url",

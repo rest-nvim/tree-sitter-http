@@ -155,10 +155,22 @@
       ]
     },
     "json_string_content": {
-      "type": "TOKEN",
+      "type": "REPEAT1",
       "content": {
-        "type": "PATTERN",
-        "value": "[\\w\\s]+"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\\\\"\\n]+"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "json_escape_sequence"
+          }
+        ]
       }
     },
     "json_array": {
@@ -261,6 +273,26 @@
         "value": "\\d+(\\.\\d+)?|\\.\\d+"
       }
     },
+    "json_boolean": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "true"
+        },
+        {
+          "type": "STRING",
+          "value": "false"
+        }
+      ]
+    },
+    "json_null": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "null"
+      }
+    },
     "_json_value": {
       "type": "CHOICE",
       "members": [
@@ -271,6 +303,14 @@
         {
           "type": "SYMBOL",
           "name": "json_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_boolean"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_null"
         },
         {
           "type": "SYMBOL",
@@ -352,6 +392,22 @@
                 }
               ]
             }
+          }
+        ]
+      }
+    },
+    "json_escape_sequence": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\"
+          },
+          {
+            "type": "PATTERN",
+            "value": "(\\\"|\\\\|\\/|b|f|n|r|t|u)"
           }
         ]
       }

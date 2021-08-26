@@ -11,3 +11,19 @@
 (header
   name: (name) @constant
   value: (value))
+
+; JSON
+(json_pair
+  key: (_) @keyword)
+
+(json_string) @string
+
+(json_number) @number
+
+(json_boolean) @boolean
+
+(json_null) @constant
+
+(json_escape_sequence) @TSStringEscape
+
+(json_body) @keyword
