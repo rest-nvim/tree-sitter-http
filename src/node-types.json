@@ -1,5 +1,21 @@
 [
   {
+    "type": "external_body",
+    "named": true,
+    "fields": {
+      "json_file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "json_file",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "header",
     "named": true,
     "fields": {
@@ -28,6 +44,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "interpolation",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "json_array",
@@ -82,6 +103,11 @@
   },
   {
     "type": "json_boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "json_file",
     "named": true,
     "fields": {}
   },
@@ -156,6 +182,10 @@
       "required": false,
       "types": [
         {
+          "type": "interpolation",
+          "named": true
+        },
+        {
           "type": "json_escape_sequence",
           "named": true
         }
@@ -201,6 +231,10 @@
           "named": true
         },
         {
+          "type": "external_body",
+          "named": true
+        },
+        {
           "type": "header",
           "named": true
         },
@@ -224,7 +258,15 @@
     "named": false
   },
   {
+    "type": ".json",
+    "named": false
+  },
+  {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": "<",
     "named": false
   },
   {
@@ -276,7 +318,15 @@
     "named": true
   },
   {
+    "type": "{{",
+    "named": false
+  },
+  {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "}}",
     "named": false
   }
 ]

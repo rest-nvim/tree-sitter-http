@@ -21,6 +21,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "external_body"
+        },
+        {
+          "type": "SYMBOL",
           "name": "json_body"
         },
         {
@@ -104,6 +108,66 @@
       "type": "PATTERN",
       "value": "[^\\n]+"
     },
+    "interpolation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "{{"
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "[A-Z-a-z0-9-_.]+"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "}}"
+          }
+        }
+      ]
+    },
+    "json_file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[A-Za-z-_./]+"
+        },
+        {
+          "type": "STRING",
+          "value": ".json"
+        }
+      ]
+    },
+    "external_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "<"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        },
+        {
+          "type": "FIELD",
+          "name": "json_file",
+          "content": {
+            "type": "SYMBOL",
+            "name": "json_file"
+          }
+        }
+      ]
+    },
     "json_body": {
       "type": "SEQ",
       "members": [
@@ -169,6 +233,10 @@
           {
             "type": "SYMBOL",
             "name": "json_escape_sequence"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "interpolation"
           }
         ]
       }

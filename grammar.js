@@ -4,7 +4,7 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($._definition),
 
-    _definition: ($) => choice($.request, $.header, $.json_body, $.comment),
+    _definition: ($) => choice($.request, $.header, $.external_body, $.json_body, $.comment),
 
     request: ($) =>
       seq(field("method", $.method), $._whitespace, field("url", $.url)),
@@ -24,6 +24,15 @@ module.exports = grammar({
     name: (_) => /[A-Za-z-]+/,
 
     value: (_) => /[^\n]+/,
+
+    json_file: (_) => seq(/[A-Za-z-_./]+/, ".json"),
+
+    external_body: ($) =>
+      seq(
+        token("<"),
+        $._whitespace,
+        field("json_file", $.json_file),
+      ),
 
     json_body: ($) =>
       seq(
