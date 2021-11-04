@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/NTBBloodbath/tree-sitter-http#readme",
   "dependencies": {
-    "nan": "^2.14.2"
+    "nan": "^2.14.2",
+    "tree-sitter-json": "^0.19.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.0"

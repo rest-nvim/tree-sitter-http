@@ -1,10 +1,18 @@
-module.exports = grammar({
+const json = require("tree-sitter-json/grammar");
+
+module.exports = grammar(json, {
   name: "http",
 
-  rules: {
-    source_file: ($) => repeat($._definition),
+  extras: ($, original) => [
+    ...original,
+    $.request,
+    $.header,
+    $.external_body,
+    $.comment,
+  ],
 
-    _definition: ($) => choice($.request, $.header, $.external_body, $.json_body, $.comment),
+  rules: {
+    document: ($, original) => optional(original),
 
     request: ($) =>
       seq(field("method", $.method), $._whitespace, field("url", $.url)),
@@ -34,58 +42,7 @@ module.exports = grammar({
         field("json_file", $.json_file),
       ),
 
-    json_body: ($) =>
-      seq(
-        token(/\{\s+/),
-        optional($.json_pair),
-        repeat(seq(token(","), $.json_pair)),
-        token("}")
-      ),
-
-    json_string_content: ($) =>
-      repeat1(choice(token.immediate(/[^\\"\n]+/), $.json_escape_sequence)),
-
-    json_array: ($) =>
-      seq(
-        token("["),
-        field("array_content", optional($._json_value)),
-        repeat(seq(token(","), field("array_content", $._json_value))),
-        token("]")
-      ),
-
-    json_string: ($) =>
-      seq(
-        token('"'),
-        field("string_content", optional($.json_string_content)),
-        token('"')
-      ),
-
-    json_number: (_) => token(/\d+(\.\d+)?|\.\d+/),
-
-    json_boolean: (_) => choice("true", "false"),
-
-    json_null: (_) => token("null"),
-
-    _json_value: ($) =>
-      choice($.json_string, $.json_number, $.json_boolean, $.json_null, $.json_array, $.json_body),
-
-    json_pair: ($) =>
-      prec.left(
-        0,
-        seq(
-          optional($._whitespace),
-          token('"'),
-          field("key", $.json_string_content),
-          token(/"\s*:/),
-          field("value", $._json_value),
-          repeat(seq(token(","), field("value", $._json_value)))
-        )
-      ),
-
-    json_escape_sequence: (_) =>
-      token.immediate(seq("\\", /(\"|\\|\/|b|f|n|r|t|u)/)),
-
-    comment: (_) => token(seq("#", /.*/)),
+    comment: ($) => token(seq("#", /.*/)),
 
     _whitespace: (_) => repeat1(/[\t\v ]/),
   },

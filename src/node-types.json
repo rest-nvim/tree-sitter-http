@@ -1,5 +1,69 @@
 [
   {
+    "type": "_value",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "array",
+        "named": true
+      },
+      {
+        "type": "false",
+        "named": true
+      },
+      {
+        "type": "null",
+        "named": true
+      },
+      {
+        "type": "number",
+        "named": true
+      },
+      {
+        "type": "object",
+        "named": true
+      },
+      {
+        "type": "string",
+        "named": true
+      },
+      {
+        "type": "true",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "external_body",
     "named": true,
     "fields": {
@@ -46,43 +110,12 @@
     }
   },
   {
-    "type": "json_array",
+    "type": "json_file",
     "named": true,
-    "fields": {
-      "array_content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "json_array",
-            "named": true
-          },
-          {
-            "type": "json_body",
-            "named": true
-          },
-          {
-            "type": "json_boolean",
-            "named": true
-          },
-          {
-            "type": "json_null",
-            "named": true
-          },
-          {
-            "type": "json_number",
-            "named": true
-          },
-          {
-            "type": "json_string",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
-    "type": "json_body",
+    "type": "object",
     "named": true,
     "fields": {},
     "children": {
@@ -90,24 +123,14 @@
       "required": false,
       "types": [
         {
-          "type": "json_pair",
+          "type": "pair",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "json_boolean",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "json_file",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "json_pair",
+    "type": "pair",
     "named": true,
     "fields": {
       "key": {
@@ -115,72 +138,25 @@
         "required": true,
         "types": [
           {
-            "type": "json_string_content",
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
       },
       "value": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "json_array",
-            "named": true
-          },
-          {
-            "type": "json_body",
-            "named": true
-          },
-          {
-            "type": "json_boolean",
-            "named": true
-          },
-          {
-            "type": "json_null",
-            "named": true
-          },
-          {
-            "type": "json_number",
-            "named": true
-          },
-          {
-            "type": "json_string",
+            "type": "_value",
             "named": true
           }
         ]
       }
-    }
-  },
-  {
-    "type": "json_string",
-    "named": true,
-    "fields": {
-      "string_content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "json_string_content",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "json_string_content",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "json_escape_sequence",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -210,7 +186,22 @@
     }
   },
   {
-    "type": "source_file",
+    "type": "string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "string_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_content",
     "named": true,
     "fields": {},
     "children": {
@@ -218,23 +209,7 @@
       "required": false,
       "types": [
         {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "external_body",
-          "named": true
-        },
-        {
-          "type": "header",
-          "named": true
-        },
-        {
-          "type": "json_body",
-          "named": true
-        },
-        {
-          "type": "request",
+          "type": "escape_sequence",
           "named": true
         }
       ]
@@ -273,19 +248,11 @@
     "named": true
   },
   {
+    "type": "escape_sequence",
+    "named": true
+  },
+  {
     "type": "false",
-    "named": false
-  },
-  {
-    "type": "json_escape_sequence",
-    "named": true
-  },
-  {
-    "type": "json_null",
-    "named": true
-  },
-  {
-    "type": "json_number",
     "named": true
   },
   {
@@ -297,8 +264,16 @@
     "named": true
   },
   {
+    "type": "null",
+    "named": true
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
     "type": "true",
-    "named": false
+    "named": true
   },
   {
     "type": "url",
@@ -307,6 +282,10 @@
   {
     "type": "value",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
   },
   {
     "type": "}",
