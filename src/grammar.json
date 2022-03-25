@@ -2,16 +2,11 @@
   "name": "http",
   "rules": {
     "document": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_value"
-        },
-        {
-          "type": "BLANK"
-        }
-      ]
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_value"
+      }
     },
     "_value": {
       "type": "CHOICE",
@@ -679,11 +674,11 @@
     },
     "method": {
       "type": "PATTERN",
-      "value": "(?:GET|POST|PATCH|DELETE|PUT)"
+      "value": "(GET|POST|PATCH|DELETE|PUT)"
     },
     "url": {
       "type": "PATTERN",
-      "value": "(www|http:|https:)\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?([\\w.,@?^=%&amp;:\\/~+#-]*[\\w@?^=%&amp;\\/~+#-])?"
+      "value": "((www|http:|https:)\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?|\\{\\{\\w+\\}\\})([\\w.,@?^=%&amp;:\\/~+#\\{\\}\\u00C0-\\u00FF-]*[\\w@?^=%&amp;\\/~+#\\u00C0-\\u00FF-])?"
     },
     "header": {
       "type": "SEQ",
