@@ -12,12 +12,12 @@ module.exports = grammar(json, {
   ],
 
   rules: {
-    document: ($, original) => optional(original),
+    document: ($, original) => repeat(original),
 
     request: ($) =>
       seq(field("method", $.method), $._whitespace, field("url", $.url)),
 
-    method: (_) => /(?:GET|POST|PATCH|DELETE|PUT)/,
+    method: (_) => /(GET|POST|PATCH|DELETE|PUT)/,
 
     url: (_) =>
       /((www|http:|https:)\/\/(?:w{1,3}\.)?[^\s.]+(?:\.[a-z]+)*(?::\d+)?|\{\{\w+\}\})([\w.,@?^=%&amp;:\/~+#\{\}\u00C0-\u00FF-]*[\w@?^=%&amp;\/~+#\u00C0-\u00FF-])?/,
