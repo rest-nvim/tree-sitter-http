@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NTBBloodbath/tree-sitter-http.git"
+    "url": "git+https://github.com/rest-nvim/tree-sitter-http.git"
   },
   "keywords": [
     "treesitter",
@@ -21,9 +21,9 @@
   "author": "NTBBloodbath",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NTBBloodbath/tree-sitter-http/issues"
+    "url": "https://github.com/rest-nvim/tree-sitter-http/issues"
   },
-  "homepage": "https://github.com/NTBBloodbath/tree-sitter-http#readme",
+  "homepage": "https://github.com/rest-nvim/tree-sitter-http#readme",
   "dependencies": {
     "nan": "^2.14.2",
     "tree-sitter-json": "^0.19.0"
