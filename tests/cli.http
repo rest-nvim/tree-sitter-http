@@ -1,0 +1,9 @@
+
+###
+curl -sS https://webinstall.dev/curli
+
+###
+http GET pie.dev/get
+
+### 
+xh GET httpbin.org/json x-api-key:12345

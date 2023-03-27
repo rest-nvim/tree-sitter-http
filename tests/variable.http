@@ -1,0 +1,21 @@
+### 
+@host = http://httpbin.org/
+
+###
+# @name captcha
+GET {{host}}/captcha
+
+###
+GET {{host}}{{captcha.response.body.data.captcha_url}}
+
+
+### test
+POST {{host}}/captcha/test
+Content-Type: application/json
+
+{
+	"captcha_id": "{{captcha.response.body.data.captcha_id}}",
+	"captcha":"{{captcha.response.body.data.captcha_val}}",
+	"id":3
+}
+
