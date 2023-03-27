@@ -1,52 +1,23 @@
 [
   {
-    "type": "_value",
-    "named": true,
-    "subtypes": [
-      {
-        "type": "array",
-        "named": true
-      },
-      {
-        "type": "false",
-        "named": true
-      },
-      {
-        "type": "null",
-        "named": true
-      },
-      {
-        "type": "number",
-        "named": true
-      },
-      {
-        "type": "object",
-        "named": true
-      },
-      {
-        "type": "string",
-        "named": true
-      },
-      {
-        "type": "true",
-        "named": true
-      }
-    ]
-  },
-  {
-    "type": "array",
+    "type": "authority",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "_value",
+          "type": "pair",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "document",
@@ -57,7 +28,43 @@
       "required": false,
       "types": [
         {
-          "type": "_value",
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "external_body",
+          "named": true
+        },
+        {
+          "type": "header",
+          "named": true
+        },
+        {
+          "type": "json_body",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "query_param",
+          "named": true
+        },
+        {
+          "type": "request",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        },
+        {
+          "type": "xml_body",
           "named": true
         }
       ]
@@ -67,16 +74,26 @@
     "type": "external_body",
     "named": true,
     "fields": {
-      "json_file": {
+      "file_path": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "json_file",
+            "type": "path",
             "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -84,13 +101,9 @@
     "named": true,
     "fields": {
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": ":",
-            "named": false
-          },
           {
             "type": "name",
             "named": true
@@ -110,20 +123,44 @@
     }
   },
   {
-    "type": "json_file",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "object",
+    "type": "host",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "http_version",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "json_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "pair",
+          "type": "const_spec",
           "named": true
         }
       ]
@@ -133,16 +170,12 @@
     "type": "pair",
     "named": true,
     "fields": {
-      "key": {
+      "name": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -152,7 +185,48 @@
         "required": true,
         "types": [
           {
-            "type": "_value",
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_param",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "key",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value",
             "named": true
           }
         ]
@@ -162,23 +236,82 @@
   {
     "type": "request",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "http_version",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "target_url",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "target_url",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "authority",
+          "named": true
+        },
+        {
+          "type": "host",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        },
+        {
+          "type": "query_param",
+          "named": true
+        },
+        {
+          "type": "scheme",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_declaration",
+    "named": true,
     "fields": {
-      "method": {
+      "identifier": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "method",
-            "named": true
-          }
-        ]
-      },
-      "url": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "url",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -186,45 +319,20 @@
     }
   },
   {
-    "type": "string",
+    "type": "xml_body",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "string_content",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
-    "type": "string_content",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "\"",
+    "type": "&",
     "named": false
   },
   {
-    "type": ",",
+    "type": "(",
     "named": false
   },
   {
-    "type": ".json",
+    "type": "/",
     "named": false
   },
   {
@@ -232,31 +340,39 @@
     "named": false
   },
   {
+    "type": "://",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
   {
-    "type": "[",
+    "type": "=",
     "named": false
   },
   {
-    "type": "]",
+    "type": "?",
     "named": false
   },
   {
-    "type": "comment",
-    "named": true
+    "type": "@",
+    "named": false
   },
   {
-    "type": "escape_sequence",
+    "type": "const_spec",
     "named": true
   },
   {
     "type": "false",
+    "named": false
+  },
+  {
+    "type": "identifier",
     "named": true
   },
   {
-    "type": "method",
+    "type": "key",
     "named": true
   },
   {
@@ -264,31 +380,31 @@
     "named": true
   },
   {
-    "type": "null",
-    "named": true
-  },
-  {
     "type": "number",
     "named": true
   },
   {
-    "type": "true",
+    "type": "query",
+    "named": false
+  },
+  {
+    "type": "scheme",
     "named": true
   },
   {
-    "type": "url",
-    "named": true
+    "type": "true",
+    "named": false
   },
   {
     "type": "value",
     "named": true
   },
   {
-    "type": "{",
+    "type": "{{",
     "named": false
   },
   {
-    "type": "}",
+    "type": "}}",
     "named": false
   }
 ]
