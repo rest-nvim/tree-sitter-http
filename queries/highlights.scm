@@ -4,12 +4,6 @@
 ; Comments
 (comment) @comment
 
-(method) @keyword
-(target_url) @text.uri
-(host) @text.uri
-(path) @text.uri
-(scheme) @keyword
-
 (request
   method: (method) @keyword
   url: (target_url) @text.uri)
@@ -31,8 +25,11 @@
 (external_body
   file_path: (file_path) @text.uri) @keyword
 
+(host) @text.uri
+(path) @text.uri
 (number) @number
 (string) @string
+(scheme) @keyword
 (variable) @variable
 (variable_declaration 
   identifier: (identifier) @variable
