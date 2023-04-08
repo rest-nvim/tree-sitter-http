@@ -12,7 +12,7 @@
 
 (request
   method: (method) @keyword
-  url: (url) @text.uri)
+  url: (target_url) @text.uri)
 
 (pair
   name: (_) @attribute
