@@ -13,7 +13,7 @@
   value: (_) @string)
 
 
-(query_param 
+(query_param
   key: (key) @attribute
   value: (value) @string)
 
@@ -31,7 +31,7 @@
 (string) @string
 (scheme) @keyword
 (variable) @variable
-(variable_declaration 
+(variable_declaration
   identifier: (identifier) @variable
   value: (value) @string)
 
