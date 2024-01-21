@@ -18,7 +18,7 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
 
 # Tasks
 
-- [ ] variable
+- [x] variable
 - [x] comment
 - [x] request 
     - [x] method
@@ -36,5 +36,5 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
         - [x] json
         - [x] xml
         - [x] file
-        - [ ] graphq
+        - [x] graphq
 - [ ] cli
