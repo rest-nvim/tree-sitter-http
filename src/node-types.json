@@ -32,27 +32,15 @@
           "named": true
         },
         {
-          "type": "external_body",
-          "named": true
-        },
-        {
-          "type": "header",
-          "named": true
-        },
-        {
-          "type": "json_body",
-          "named": true
-        },
-        {
           "type": "number",
           "named": true
         },
         {
-          "type": "query_param",
+          "type": "request",
           "named": true
         },
         {
-          "type": "request",
+          "type": "script_variable",
           "named": true
         },
         {
@@ -61,10 +49,6 @@
         },
         {
           "type": "variable_declaration",
-          "named": true
-        },
-        {
-          "type": "xml_body",
           "named": true
         }
       ]
@@ -95,6 +79,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "graphql_body",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "header",
@@ -203,6 +192,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -242,7 +235,23 @@
       "required": true,
       "types": [
         {
+          "type": "external_body",
+          "named": true
+        },
+        {
+          "type": "graphql_body",
+          "named": true
+        },
+        {
+          "type": "header",
+          "named": true
+        },
+        {
           "type": "http_version",
+          "named": true
+        },
+        {
+          "type": "json_body",
           "named": true
         },
         {
@@ -252,9 +261,18 @@
         {
           "type": "target_url",
           "named": true
+        },
+        {
+          "type": "xml_body",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "script_variable",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "target_url",
@@ -283,6 +301,10 @@
         {
           "type": "scheme",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -290,23 +312,34 @@
   {
     "type": "variable",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "variable_declaration",
     "named": true,
     "fields": {
-      "identifier": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
         "multiple": false,
         "required": true,
         "types": [
@@ -364,10 +397,6 @@
     "named": true
   },
   {
-    "type": "false",
-    "named": false
-  },
-  {
     "type": "identifier",
     "named": true
   },
@@ -390,10 +419,6 @@
   {
     "type": "scheme",
     "named": true
-  },
-  {
-    "type": "true",
-    "named": false
   },
   {
     "type": "value",

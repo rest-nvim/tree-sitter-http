@@ -17,7 +17,12 @@
 
 ; Variables
 
-(identifier) @variable
+(variable_declaration
+  name: (identifier) @variable)
+
+(variable_declaration
+  value: (identifier) @number
+  (#lua-match? @number "%d+"))
 
 ; Fields
 
@@ -39,19 +44,14 @@
   "?"
   "&"
   "@"
+  "<"
 ] @operator
 
 ; Literals
 
-(string) @string
-
 (target_url) @text.uri
 
 (number) @number
-
-; (boolean) @boolean
-
-(null) @constant.builtin
 
 ; Punctuation
 
@@ -61,6 +61,11 @@
   ":"
 ] @punctuation.delimiter
 
+; external JSON body
+
+(external_body
+  file_path: (path) @text.uri)
+
 ; Comments
 
 (comment) @comment @spell
@@ -68,4 +73,3 @@
 ; Errors
 
 (ERROR) @error
-
