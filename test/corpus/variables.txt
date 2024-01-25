@@ -75,6 +75,40 @@ Content-Type: application/json
     (json_body)))
 
 
+==========================================
+Request with document variable as the URL
+==========================================
+
+@url = "https://foo.com/api"
+
+POST {{ url }}/users/create
+Content-Type: application/json
+
+{
+  "username": "JohnDoe",
+  "is_admin": false
+}
+
+---
+
+(document
+  (variable_declaration
+    name: (identifier)
+    value: (string))
+  (request
+    (method)
+    (target_url
+      (variable
+        name: (identifier))
+      (path
+        (identifier)
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (json_body)))
+
+
 ==================================
 Request with Lua script variables
 ==================================
