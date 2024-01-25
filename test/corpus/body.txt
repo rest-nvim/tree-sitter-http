@@ -126,4 +126,27 @@ query ($name: String!, $owner: String!) {
 External body file
 ===================
 
+POST https://example.com/api/v1/users/new
+Content-Type: application/json
 
+< ./user.json
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (external_body
+      file_path: (path))))
