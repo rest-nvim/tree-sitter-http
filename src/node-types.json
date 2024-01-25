@@ -15,11 +15,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -275,6 +270,11 @@
     }
   },
   {
+    "type": "scheme",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "script_variable",
     "named": true,
     "fields": {}
@@ -398,36 +398,188 @@
     "named": false
   },
   {
+    "type": "HTTP/",
+    "named": false
+  },
+  {
+    "type": "about",
+    "named": false
+  },
+  {
+    "type": "acct",
+    "named": false
+  },
+  {
+    "type": "arcp",
+    "named": false
+  },
+  {
+    "type": "cap",
+    "named": false
+  },
+  {
+    "type": "cid",
+    "named": false
+  },
+  {
+    "type": "coap+tcp",
+    "named": false
+  },
+  {
+    "type": "coap+ws",
+    "named": false
+  },
+  {
+    "type": "coaps+tcp",
+    "named": false
+  },
+  {
+    "type": "coaps+ws",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "const_spec",
     "named": true
+  },
+  {
+    "type": "data",
+    "named": false
+  },
+  {
+    "type": "dns",
+    "named": false
+  },
+  {
+    "type": "example",
+    "named": false
+  },
+  {
+    "type": "file",
+    "named": false
+  },
+  {
+    "type": "ftp",
+    "named": false
+  },
+  {
+    "type": "geo",
+    "named": false
+  },
+  {
+    "type": "h323",
+    "named": false
+  },
+  {
+    "type": "http",
+    "named": false
+  },
+  {
+    "type": "https",
+    "named": false
   },
   {
     "type": "identifier",
     "named": true
   },
   {
+    "type": "im",
+    "named": false
+  },
+  {
+    "type": "info",
+    "named": false
+  },
+  {
+    "type": "ipp",
+    "named": false
+  },
+  {
     "type": "key",
     "named": true
+  },
+  {
+    "type": "mailto",
+    "named": false
+  },
+  {
+    "type": "mid",
+    "named": false
   },
   {
     "type": "name",
     "named": true
   },
   {
+    "type": "ni",
+    "named": false
+  },
+  {
+    "type": "nih",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "payto",
+    "named": false
+  },
+  {
+    "type": "pkcs11",
+    "named": false
+  },
+  {
+    "type": "pres",
+    "named": false
   },
   {
     "type": "query",
     "named": false
   },
   {
-    "type": "scheme",
-    "named": true
+    "type": "reload",
+    "named": false
+  },
+  {
+    "type": "secret-token",
+    "named": false
+  },
+  {
+    "type": "session",
+    "named": false
+  },
+  {
+    "type": "sms",
+    "named": false
+  },
+  {
+    "type": "tag",
+    "named": false
+  },
+  {
+    "type": "telnet",
+    "named": false
+  },
+  {
+    "type": "urn",
+    "named": false
   },
   {
     "type": "value",
     "named": true
+  },
+  {
+    "type": "ws",
+    "named": false
+  },
+  {
+    "type": "wss",
+    "named": false
   },
   {
     "type": "{{",
