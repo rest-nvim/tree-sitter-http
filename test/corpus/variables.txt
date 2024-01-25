@@ -1,3 +1,80 @@
+===============================
+Request with dynamic variables
+===============================
+
+POST https://reqres.in/api/users
+Content-Type: application/json
+
+{
+    "userid" : "{{$uuid}}",
+    "time" : "{{$timestamp}}",
+    "randomValue": "{{$randomInt}}",
+    "name": "morpheus",
+    "job": "leader",
+    "array": ["a", "b", "c"],
+    "object_ugly_closing": {
+      "some_key": "some_value"
+    }
+}
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (json_body)))
+
+
+================================
+Request with document variables
+================================
+
+@username = "NTBBloodbath"
+@admin = true
+
+POST https://foo.com/api/users/create
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "is_admin": "{{admin}}"
+}
+
+---
+
+(document
+  (variable_declaration
+    name: (identifier)
+    value: (string))
+  (variable_declaration
+    name: (identifier)
+    value: (boolean))
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier)
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (json_body)))
+
+
 ==================================
 Request with Lua script variables
 ==================================
