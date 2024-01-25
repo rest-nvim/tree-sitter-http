@@ -1,6 +1,6 @@
-==========
-JSON body
-==========
+===================
+JSON body (object)
+===================
 
 PUT https://reqres.in/api/users/2
 Content-Type: application/json
@@ -9,6 +9,39 @@ Content-Type: application/json
     "name": "morpheus",
     "job": "zion resident"
 }
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier)
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (json_body)))
+
+
+===================
+JSON body (array)
+===================
+
+PUT https://reqres.in/api/users/2
+Content-Type: application/json
+
+[
+    {
+        "name": "morpheus",
+        "job": "zion resident"
+    }
+]
 
 ---
 
