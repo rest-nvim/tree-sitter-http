@@ -32,7 +32,8 @@ module.exports = grammar({
 
         method: $ => choice(/(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH)/, $.const_spec),
 
-        host: $ => prec.left(PREC.request, seq($.identifier, optional($.pair))),
+        host: $ => prec.left(PREC.request, seq($.identifier, optional($.port))),
+        port: $ => seq(":", /\d+/),
         path: $ => repeat1(choice("/", seq("/", $.identifier, optional("/")), seq("/", $.variable, optional("/")))),
         scheme: _ => /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
         authority: $ => prec.left(PREC.request, seq(optional($.pair), "@")),

@@ -124,7 +124,7 @@
           "named": true
         },
         {
-          "type": "pair",
+          "type": "port",
           "named": true
         }
       ]
@@ -199,6 +199,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "port",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "query_param",
