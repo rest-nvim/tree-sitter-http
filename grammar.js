@@ -142,8 +142,14 @@ module.exports = grammar({
                 field("value", alias($._line, $.value)),
             ),
 
-        // {{foo}} {{$bar}}
-        variable: ($) => seq("{{", field("name", $.identifier), "}}"),
+        // {{foo}} {{$bar}} {{ fizzbuzz }}
+        variable: ($) => seq(
+            "{{",
+            optional($._whitespace),
+            field("name", $.identifier),
+            optional($._whitespace),
+            "}}"
+        ),
 
         script_variable: ($) =>
             seq(token(/--\{%\n/), repeat1($._line), token(/--%\}\n/)),
