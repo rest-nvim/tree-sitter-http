@@ -170,7 +170,7 @@ module.exports = grammar({
             ),
 
         // the final optional is for improving readability just in case
-        json_body: ($) => seq(/\{\n/, repeat1($._line), /\}\n/, optional(/\n/)),
+        json_body: ($) => seq(choice(/\{\n/, /\[\n/), repeat1($._line), choice(/\}\n/, /\]\n/), optional(/\n/)),
 
         // the final optional is for improving readability just in case
         graphql_body: ($) =>
