@@ -21,8 +21,13 @@
   name: (identifier) @variable)
 
 (variable_declaration
-  value: (identifier) @number
-  (#lua-match? @number "%d+"))
+  value: (number) @number)
+
+(variable_declaration
+  value: (boolean) @boolean)
+
+(variable_declaration
+  value: (string) @string)
 
 ; Fields
 
