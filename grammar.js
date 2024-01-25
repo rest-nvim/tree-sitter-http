@@ -6,7 +6,12 @@ const PREC = {
     request: 3,
     param: 4,
     header: 5,
-    body: 6,
+    body: {
+        graphql: 6,
+        json: 7,
+        xml: 8,
+        external: 9,
+    },
 }
 
 module.exports = grammar({
@@ -32,7 +37,7 @@ module.exports = grammar({
 
         method: $ => choice(/(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH)/, $.const_spec),
 
-        host: $ => prec.left(PREC.request, seq($.identifier, optional($.port))),
+        host: $ => prec.right(PREC.request, seq($.identifier, optional($.port))),
         port: $ => seq(":", /\d+/),
         path: $ => repeat1(choice("/", seq("/", $.identifier, optional("/")), seq("/", $.variable, optional("/")))),
         scheme: _ => /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
@@ -41,37 +46,38 @@ module.exports = grammar({
 
         target_url: $ => choice(
             seq(
+                $.path,
+                repeat($.query_param),
+            ),
+            seq(
                 optional(seq($.scheme, "://")),
                 optional($.authority),
                 $.host,
                 optional($.path),
-                optional(repeat1($.query_param))
+                repeat($.query_param),
             ),
             seq(
                 $.variable,
                 optional($.authority),
                 $.host,
                 optional($.path),
-                optional(repeat1($.query_param))
+                repeat($.query_param),
             )
         ),
 
-        request: $ => prec.left(PREC.request, seq(
+        request: $ => prec.right(PREC.request, seq(
             $.method,
             $._whitespace,
             $.target_url,
             optional(seq($._whitespace, $.http_version)),
             NL,
-            optional(repeat1($.header)),
-            optional(repeat1(NL)),
-            optional(choice(
+            repeat($.header),
+            repeat(NL),
+            repeat(choice(
                 $.external_body,
                 $.xml_body,
                 $.json_body,
-                seq(
-                    $.graphql_body,
-                    $.json_body,
-                ),
+                $.graphql_body,
             )),
         )),
 
@@ -98,20 +104,20 @@ module.exports = grammar({
         )),
 
         // {{foo}} {{$bar}}
-        variable: $ => prec.left(PREC.variable, seq(
+        variable: $ => prec.right(PREC.variable, seq(
             "{{",
             field("name", $.identifier),
             "}}",
         )),
 
-        script_variable: $ => prec.left(PREC.variable, seq(
+        script_variable: $ => prec.right(PREC.variable, seq(
             token(/--\{%\n/),
             repeat(NL),
             repeat(seq($._line, NL)),
             token(/--%\}\n/),
         )),
 
-        variable_declaration: $ => prec.left(PREC.variable, seq(
+        variable_declaration: $ => prec.right(PREC.variable, seq(
             "@",
             field("name", $.identifier),
             seq(
@@ -123,20 +129,20 @@ module.exports = grammar({
         )),
 
         // the final optional is for improving readability just in case
-        xml_body: $ => prec.left(PREC.body, seq(/<\?xml.*\?>/, NL, repeat(seq($._line, NL)), /<\/.*>\n/, optional(/\n/))),
+        xml_body: $ => prec.right(PREC.body.xml, seq(/<\?xml.*\?>/, NL, repeat(seq($._line, NL)), /<\/.*>\n/, optional(/\n/))),
 
         // the final optional is for improving readability just in case
-        json_body: $ => prec.left(PREC.body, seq(/\{\n/, repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
+        json_body: $ => prec.right(PREC.body.json, seq(/\{\n/, repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
         // the final optional is for improving readability just in case
-        graphql_body: $ => prec.left(PREC.body, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
+        graphql_body: $ => prec.right(PREC.body.graphql, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
-        external_body: $ => seq(
+        external_body: $ => prec.right(PREC.body.external, seq(
             "<",
             optional(seq("@", $.identifier)),
             $._whitespace,
             field("file_path", alias($._line, $.path))
-        ),
+        )),
 
         const_spec: _ => /[A-Z][A-Z\\d_]+/,
         identifier: _ => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
