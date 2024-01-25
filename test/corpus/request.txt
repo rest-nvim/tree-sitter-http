@@ -1,0 +1,62 @@
+=====================
+Request to localhost
+=====================
+
+GET http://localhost:3000/api/v1/users/all
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+(host
+        (identifier)
+        (port))
+      (path
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)))))
+
+
+============================
+Request to a random website
+============================
+
+GET https://neorg.org/
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path))))
+
+
+========================
+Request with parameters
+========================
+
+GET https://reqres.in/api/users?page=5
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier))
+      (query_param
+        key: (key)
+        value: (value)))))
