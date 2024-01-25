@@ -45,6 +45,10 @@ module.exports = grammar({
         http_version: _ => prec.right(/HTTP\/1\.1|HTTP\/2/),
 
         target_url: $ => choice(
+            // this first case allows using the Host header and set only the path in the request, e.g.
+            //
+            // GET /api/users?page=5
+            // Host: https://reqres.in
             seq(
                 $.path,
                 repeat($.query_param),
