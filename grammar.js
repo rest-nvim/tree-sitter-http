@@ -68,7 +68,10 @@ module.exports = grammar({
                 $.external_body,
                 $.xml_body,
                 $.json_body,
-                $.graphql_body,
+                seq(
+                    $.graphql_body,
+                    $.json_body,
+                ),
             )),
         )),
 
@@ -126,7 +129,7 @@ module.exports = grammar({
         json_body: $ => prec.left(PREC.body, seq(/\{\n/, repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
         // the final optional is for improving readability just in case
-        graphql_body: $ => prec(PREC.body, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
+        graphql_body: $ => prec.left(PREC.body, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
         external_body: $ => seq(
             "<",

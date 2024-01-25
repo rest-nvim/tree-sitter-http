@@ -442,8 +442,17 @@
                     "name": "json_body"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "graphql_body"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "graphql_body"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "json_body"
+                      }
+                    ]
                   }
                 ]
               },
@@ -848,7 +857,7 @@
       }
     },
     "graphql_body": {
-      "type": "PREC",
+      "type": "PREC_LEFT",
       "value": 6,
       "content": {
         "type": "SEQ",
