@@ -119,11 +119,14 @@ module.exports = grammar({
             )
         )),
 
-        xml_body: $ => prec.left(PREC.body, seq(/<\?xml.*\?>/, NL, repeat(seq($._line, NL)), /<\/.*>\n\n/)),
+        // the final optional is for improving readability just in case
+        xml_body: $ => prec.left(PREC.body, seq(/<\?xml.*\?>/, NL, repeat(seq($._line, NL)), /<\/.*>\n/, optional(/\n/))),
 
-        json_body: $ => prec.left(PREC.body, seq(/\{\n/, repeat(seq($._line, NL)), field("json_body_end", /\}\n\n/))),
+        // the final optional is for improving readability just in case
+        json_body: $ => prec.left(PREC.body, seq(/\{\n/, repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
-        graphql_body: $ => prec(PREC.body, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n\n/)),
+        // the final optional is for improving readability just in case
+        graphql_body: $ => prec(PREC.body, seq("query", $._whitespace, "(", repeat(seq($._line, NL)), /\}\n/, optional(/\n/))),
 
         external_body: $ => seq(
             "<",
