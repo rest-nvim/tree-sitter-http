@@ -95,7 +95,6 @@ module.exports = grammar({
                 seq(
                     $.variable,
                     optional($.authority),
-                    $.host,
                     optional($.path),
                     repeat($.query_param),
                 ),

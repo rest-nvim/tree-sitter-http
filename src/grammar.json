@@ -446,10 +446,6 @@
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "host"
-            },
-            {
               "type": "CHOICE",
               "members": [
                 {
