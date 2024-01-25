@@ -15,6 +15,11 @@
     }
   },
   {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -349,7 +354,15 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -458,6 +471,10 @@
     "named": false
   },
   {
+    "type": "false",
+    "named": false
+  },
+  {
     "type": "file",
     "named": false
   },
@@ -558,11 +575,19 @@
     "named": false
   },
   {
+    "type": "string",
+    "named": true
+  },
+  {
     "type": "tag",
     "named": false
   },
   {
     "type": "telnet",
+    "named": false
+  },
+  {
+    "type": "true",
     "named": false
   },
   {

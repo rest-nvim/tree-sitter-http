@@ -155,7 +155,7 @@ module.exports = grammar({
                     optional($._whitespace),
                     "=",
                     optional($._whitespace),
-                    field("value", $.identifier),
+                    field("value", choice($.number, $.boolean, $.string)),
                 ),
             ),
 
@@ -194,6 +194,8 @@ module.exports = grammar({
         const_spec: (_) => /[A-Z][A-Z\\d_]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
         number: (_) => /[0-9]+/,
+        string: (_) => /"[^"]*"/,
+        boolean: (_) => choice("true", "false"),
         _whitespace: (_) => repeat1(/[\t\v ]/),
         _newline: (_) => repeat1(/[\n]/),
         _line: (_) => /[^\n]+/,
