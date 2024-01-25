@@ -21,9 +21,10 @@ module.exports = grammar({
 
         comment: (_) => token(seq("#", /.*/)),
 
+        // LIST http verb is arbitrary and required to use vaultproject
         method: ($) =>
             choice(
-                /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH)/,
+                /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)/,
                 $.const_spec,
             ),
 
