@@ -15,7 +15,6 @@ module.exports = grammar({
                     $.variable_declaration,
                     $.comment,
                     $.request,
-                    $.number,
                 ),
             ),
 
