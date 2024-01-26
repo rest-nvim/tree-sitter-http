@@ -26,10 +26,6 @@
           {
             "type": "SYMBOL",
             "name": "request"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "number"
           }
         ]
       }

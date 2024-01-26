@@ -32,10 +32,6 @@
           "named": true
         },
         {
-          "type": "number",
-          "named": true
-        },
-        {
           "type": "request",
           "named": true
         },
