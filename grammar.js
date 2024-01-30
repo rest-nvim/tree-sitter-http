@@ -133,11 +133,19 @@ module.exports = grammar({
             ),
 
         header: ($) =>
-            seq(
-                field("name", alias($.identifier, $.name)),
-                ":",
-                optional($._whitespace),
-                field("value", alias($._line, $.value)),
+            choice(
+                seq(
+                    field("name", alias($.identifier, $.name)),
+                    ":",
+                    optional($._whitespace),
+                    field("value", $.variable),
+                ),
+                seq(
+                    field("name", alias($.identifier, $.name)),
+                    ":",
+                    optional($._whitespace),
+                    field("value", alias(/[a-zA-Z0-9_\-\/\s]+\n/, $.value)),
+                ),
             ),
 
         // {{foo}} {{$bar}} {{ fizzbuzz }}
