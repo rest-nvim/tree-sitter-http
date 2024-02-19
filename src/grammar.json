@@ -1081,7 +1081,15 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_line"
+                      "name": "identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "number"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "boolean"
                     }
                   ]
                 },
@@ -1108,7 +1116,7 @@
                   },
                   {
                     "type": "STRING",
-                    "value": ";"
+                    "value": "&"
                   }
                 ]
               },
@@ -1141,7 +1149,15 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "_line"
+                            "name": "identifier"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "number"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "boolean"
                           }
                         ]
                       },

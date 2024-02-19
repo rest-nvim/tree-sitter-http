@@ -191,12 +191,12 @@ Form data
 
 POST http://localhost:1234/foo
 
-name=daniel
+field1=value1
 
-name=daniel
-type=application/json
+field2=value2&field3=value3
 
-name=daniel;type=text/html
+field4=value4&
+field5=value5
 
 ---
 
@@ -215,10 +215,11 @@ name=daniel;type=text/html
       value: (value))
     (form_data
       name: (identifier)
-      value: (value))
-    (form_data
+      value: (value)
       name: (identifier)
       value: (value))
     (form_data
+      name: (identifier)
+      value: (value)
       name: (identifier)
       value: (value))))

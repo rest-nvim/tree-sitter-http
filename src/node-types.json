@@ -350,6 +350,11 @@
     }
   },
   {
+    "type": "value",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "variable",
     "named": true,
     "fields": {
@@ -422,10 +427,6 @@
   },
   {
     "type": "://",
-    "named": false
-  },
-  {
-    "type": ";",
     "named": false
   },
   {
@@ -627,10 +628,6 @@
   {
     "type": "urn",
     "named": false
-  },
-  {
-    "type": "value",
-    "named": true
   },
   {
     "type": "ws",

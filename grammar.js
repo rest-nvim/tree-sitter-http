@@ -212,14 +212,14 @@ module.exports = grammar({
             seq(
                 field("name", $.identifier),
                 "=",
-                field("value", alias(choice($.string, $._line), $.value)),
+                field("value", alias(choice($.string, $.identifier, $.number, $.boolean), $.value)),
             ),
             repeat(seq(
-                choice(repeat1(/\n/), ";"),
+                choice(repeat1(/\n/), "&"),
                 seq(
                     field("name", $.identifier),
                     "=",
-                    field("value", alias(choice($.string, $._line), $.value)),
+                    field("value", alias(choice($.string, $.identifier, $.number, $.boolean), $.value)),
                 ),
             )),
         ),
