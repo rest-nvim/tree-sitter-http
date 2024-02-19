@@ -183,3 +183,42 @@ Content-Type: application/json
       value: (value))
     (external_body
       file_path: (path))))
+
+
+===========
+Form data
+===========
+
+POST http://localhost:1234/foo
+
+name=daniel
+
+name=daniel
+type=application/json
+
+name=daniel;type=text/html
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier)
+        (port))
+      (path
+        (identifier)))
+    (form_data
+      name: (identifier)
+      value: (value))
+    (form_data
+      name: (identifier)
+      value: (value))
+    (form_data
+      name: (identifier)
+      value: (value))
+    (form_data
+      name: (identifier)
+      value: (value))))
