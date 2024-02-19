@@ -77,6 +77,32 @@
     }
   },
   {
+    "type": "form_data",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "graphql_body",
     "named": true,
     "fields": {}
@@ -244,6 +270,10 @@
           "named": true
         },
         {
+          "type": "form_data",
+          "named": true
+        },
+        {
           "type": "graphql_body",
           "named": true
         },
@@ -392,6 +422,10 @@
   },
   {
     "type": "://",
+    "named": false
+  },
+  {
+    "type": ";",
     "named": false
   },
   {

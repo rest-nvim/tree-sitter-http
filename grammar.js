@@ -110,6 +110,7 @@ module.exports = grammar({
                     repeat($.header),
                     repeat(
                         choice(
+                            $.form_data,
                             $.external_body,
                             $.xml_body,
                             $.json_body,
@@ -196,13 +197,32 @@ module.exports = grammar({
                 optional(/\n/),
             ),
 
+        // the final optional is for improving readability just in case
         external_body: ($) =>
             seq(
                 "<",
                 optional(seq("@", $.identifier)),
                 $._whitespace,
                 field("file_path", alias($._line, $.path)),
+                optional(/\n/),
             ),
+
+        // the final optional is for improving readability just in case
+        form_data: ($) => seq(
+            seq(
+                field("name", $.identifier),
+                "=",
+                field("value", alias(choice($.string, $._line), $.value)),
+            ),
+            repeat(seq(
+                choice(repeat1(/\n/), ";"),
+                seq(
+                    field("name", $.identifier),
+                    "=",
+                    field("value", alias(choice($.string, $._line), $.value)),
+                ),
+            )),
+        ),
 
         const_spec: (_) => /[A-Z][A-Z\\d_]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
