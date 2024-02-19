@@ -352,7 +352,25 @@
   {
     "type": "value",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "authority",
+          "named": true
+        },
+        {
+          "type": "host",
+          "named": true
+        },
+        {
+          "type": "scheme",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "variable",

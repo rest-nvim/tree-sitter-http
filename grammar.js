@@ -133,19 +133,29 @@ module.exports = grammar({
                 ),
             ),
 
+        host_url: ($) =>
+            seq(
+                optional(seq($.scheme, "://")),
+                optional($.authority),
+                $.host,
+            ),
+
         header: ($) =>
             choice(
-                seq(
+                prec.left(seq(
                     field("name", alias($.identifier, $.name)),
                     ":",
                     optional($._whitespace),
                     field("value", $.variable),
-                ),
+                )),
                 seq(
                     field("name", alias($.identifier, $.name)),
                     ":",
                     optional($._whitespace),
-                    field("value", alias(/[a-zA-Z0-9_\-\/\s]+\n/, $.value)),
+                    field("value", alias(choice(
+                        /[a-zA-Z0-9_\-\/\s]+\n/,
+                        $.host_url
+                    ), $.value)),
                 ),
             ),
 
