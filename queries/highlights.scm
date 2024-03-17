@@ -2,7 +2,7 @@
 (scheme) @module
 
 ; Methods
-(method) @keyword
+(method) @function.method
 
 ; Constants
 (const_spec) @constant
@@ -26,7 +26,7 @@
 
 ; Fields
 (pair
-  name: (identifier) @field)
+  name: (identifier) @variable.member)
 
 ; URL / Host
 (host) @string.special.url

@@ -1,4 +1,7 @@
-; (comment) @comment
+; Comments
+((comment) @injection.content
+  (#set! injection.language "comment"))
+
 ; Body
 ((json_body) @injection.content
   (#set! injection.language "json"))
