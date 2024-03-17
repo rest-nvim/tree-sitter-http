@@ -15,24 +15,12 @@
 (variable_declaration
   name: (identifier) @variable)
 
-(variable_declaration
-  value: (number) @number)
-
-(variable_declaration
-  value: (boolean) @boolean)
-
-(variable_declaration
-  value: (string) @string)
-
 ; Fields
 (pair
   name: (identifier) @variable.member)
 
 ; URL / Host
 (host) @string.special.url
-
-(host
-  (identifier) @string.special.url)
 
 (path
   (identifier) @string.special.url)
