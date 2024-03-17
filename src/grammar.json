@@ -414,11 +414,28 @@
               ]
             },
             {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "query_param"
-              }
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "?"
+                    },
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "query_param"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -454,11 +471,28 @@
               ]
             },
             {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "query_param"
-              }
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "?"
+                    },
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "query_param"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         }
@@ -584,11 +618,10 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "?"
+                "value": "&"
               },
               {
-                "type": "STRING",
-                "value": "&"
+                "type": "BLANK"
               }
             ]
           },
@@ -616,7 +649,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "identifier"
+                "name": "param"
               },
               "named": true,
               "value": "value"
@@ -1234,6 +1267,10 @@
     "identifier": {
       "type": "PATTERN",
       "value": "[A-Za-z_.\\$\\d\\u00A1-\\uFFFF-]+"
+    },
+    "param": {
+      "type": "PATTERN",
+      "value": "[A-Za-z_.\\$\\d\\u00A1-\\uFFFF-\\t\\v ]+"
     },
     "number": {
       "type": "PATTERN",
