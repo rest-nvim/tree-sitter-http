@@ -161,6 +161,16 @@ module.exports = grammar({
                         $.host_url
                     ), $.value)),
                 ),
+                seq(
+                    field("name", alias($.identifier, $.name)),
+                    ":",
+                    optional($._whitespace),
+                    field("value", alias(seq(
+                        /[a-zA-Z0-9_\-\/]+/,
+                        $._whitespace,
+                        $.variable,
+                    ), $.value)),
+                ),
             ),
 
         // {{foo}} {{$bar}} {{ fizzbuzz }}
