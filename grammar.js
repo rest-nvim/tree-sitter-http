@@ -131,7 +131,7 @@ module.exports = grammar({
             prec.right(
                 seq(
                     optional("&"),
-                    field("key", alias($.identifier, $.key)),
+                    field("key", alias($.query_key, $.key)),
                     "=",
                     field("value", alias($.param, $.value)),
                 ),
@@ -250,7 +250,8 @@ module.exports = grammar({
 
         const_spec: (_) => /[A-Z][A-Z\\d_]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
-        param: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-\t\v ]+/,
+        query_key: (_) => /[^&#=\n]+/,
+        param: (_) => /[^&#\n]+/,
         number: (_) => /[0-9]+/,
         string: (_) => /"[^"]*"/,
         boolean: (_) => choice("true", "false"),
