@@ -60,3 +60,35 @@ GET https://reqres.in/api/users?page=5
       (query_param
         key: (key)
         value: (value)))))
+
+
+======================================
+Request parameters with extra symbols
+======================================
+
+GET https://localhost:3000/api?id[]=1&id[]=2&email=foo@bar.com&statement=2+2=4
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier)
+        (port))
+      (path
+        (identifier))
+      (query_param
+        key: (key)
+        value: (value))
+      (query_param
+        key: (key)
+        value: (value))
+      (query_param
+        key: (key)
+        value: (value))
+      (query_param
+        key: (key)
+        value: (value)))))

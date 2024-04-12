@@ -632,7 +632,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "identifier"
+                "name": "query_key"
               },
               "named": true,
               "value": "key"
@@ -1328,9 +1328,13 @@
       "type": "PATTERN",
       "value": "[A-Za-z_.\\$\\d\\u00A1-\\uFFFF-]+"
     },
+    "query_key": {
+      "type": "PATTERN",
+      "value": "[^&#=\\n]+"
+    },
     "param": {
       "type": "PATTERN",
-      "value": "[A-Za-z_.\\$\\d\\u00A1-\\uFFFF-\\t\\v ]+"
+      "value": "[^&#\\n]+"
     },
     "number": {
       "type": "PATTERN",
