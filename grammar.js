@@ -132,12 +132,8 @@ module.exports = grammar({
                 seq(
                     optional("&"),
                     field("key", alias($.query_key, $.key)),
-                    optional(
-                        seq(
-                            "=",
-                            field("value", alias($.param, $.value)),
-                        ),
-                    )
+                    optional("="),
+                    optional(field("value", alias($.param, $.value))),
                 ),
             ),
 
