@@ -119,3 +119,30 @@ GET https://localhost:3000/api?page[number]=3&fields[available]&available
         key: (key))
       (query_param
         key: (key)))))
+
+
+======================================
+Request parameters without value and trailing =
+======================================
+
+GET https://localhost:3000/api?page[number]=3&fields[available]=&available=
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier)
+        (port))
+      (path
+        (identifier))
+      (query_param
+        key: (key)
+        value: (value))
+      (query_param
+        key: (key))
+      (query_param
+        key: (key)))))
