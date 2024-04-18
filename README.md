@@ -37,5 +37,5 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
         - [x] json
         - [x] xml
         - [x] file
-        - [x] graphq
+        - [x] graphql
 - [ ] cli
