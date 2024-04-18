@@ -144,7 +144,7 @@ module.exports = grammar({
                 ),
             ),
 
-        fragment: ($) => $.param,
+        fragment: ($) => field("identifier", alias($.param, $.identifier)),
 
         host_url: ($) =>
             seq(
