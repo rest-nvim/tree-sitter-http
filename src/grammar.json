@@ -47,17 +47,8 @@
       }
     },
     "method": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "const_spec"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)"
     },
     "host": {
       "type": "SEQ",
@@ -498,6 +489,39 @@
         }
       ]
     },
+    "status_code": {
+      "type": "PATTERN",
+      "value": "\\d{3}"
+    },
+    "status": {
+      "type": "PATTERN",
+      "value": "(OK)"
+    },
+    "response": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "http_version"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "status_code"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "status"
+        }
+      ]
+    },
     "request": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -529,6 +553,30 @@
                   {
                     "type": "SYMBOL",
                     "name": "http_version"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\r\\n]+"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "response"
                   }
                 ]
               },

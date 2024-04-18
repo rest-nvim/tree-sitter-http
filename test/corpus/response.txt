@@ -28,7 +28,10 @@ Content-Type: application/json
         (identifier)
         (identifier)
         (identifier)))
-    (response)
+    (response
+        (http_version)
+        (status_code)
+        (status))
     (header
       name: (name)
       value: (value))

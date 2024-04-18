@@ -21,11 +21,7 @@ module.exports = grammar({
         comment: (_) => token(seq("#", /.*/)),
 
         // LIST http verb is arbitrary and required to use vaultproject
-        method: ($) =>
-            choice(
-                /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)/,
-                $.const_spec,
-            ),
+        method: ($) => /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)/,
 
         host: ($) => seq($.identifier, optional($.port)),
         port: ($) => seq(":", /\d+/),
@@ -103,6 +99,10 @@ module.exports = grammar({
                 ),
             ),
 
+        status_code: ($) => /\d{3}/,
+        status: ($) => /(OK)/,
+        response: ($) => seq($.http_version, $._whitespace, $.status_code, $._whitespace, $.status),
+
         request: ($) =>
             prec.right(
                 seq(
@@ -110,6 +110,7 @@ module.exports = grammar({
                     $._whitespace,
                     $.target_url,
                     optional(seq($._whitespace, $.http_version)),
+                    optional(seq(NL, $.response)),
                     NL,
                     repeat($.header),
                     repeat(

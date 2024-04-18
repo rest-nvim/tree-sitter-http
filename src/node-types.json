@@ -167,21 +167,6 @@
     "fields": {}
   },
   {
-    "type": "method",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "const_spec",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "pair",
     "named": true,
     "fields": {
@@ -294,11 +279,38 @@
           "named": true
         },
         {
+          "type": "response",
+          "named": true
+        },
+        {
           "type": "target_url",
           "named": true
         },
         {
           "type": "xml_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "response",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "http_version",
+          "named": true
+        },
+        {
+          "type": "status",
+          "named": true
+        },
+        {
+          "type": "status_code",
           "named": true
         }
       ]
@@ -519,10 +531,6 @@
     "named": true
   },
   {
-    "type": "const_spec",
-    "named": true
-  },
-  {
     "type": "data",
     "named": false
   },
@@ -587,6 +595,10 @@
     "named": false
   },
   {
+    "type": "method",
+    "named": true
+  },
+  {
     "type": "mid",
     "named": false
   },
@@ -637,6 +649,14 @@
   {
     "type": "sms",
     "named": false
+  },
+  {
+    "type": "status",
+    "named": true
+  },
+  {
+    "type": "status_code",
+    "named": true
   },
   {
     "type": "string",
