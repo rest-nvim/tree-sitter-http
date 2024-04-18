@@ -494,8 +494,257 @@
       "value": "[1-5]\\d{2}"
     },
     "status_text": {
-      "type": "PATTERN",
-      "value": "(OK)"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "Continue"
+        },
+        {
+          "type": "STRING",
+          "value": "Switching Protocols"
+        },
+        {
+          "type": "STRING",
+          "value": "Processing"
+        },
+        {
+          "type": "STRING",
+          "value": "OK"
+        },
+        {
+          "type": "STRING",
+          "value": "Created"
+        },
+        {
+          "type": "STRING",
+          "value": "Accepted"
+        },
+        {
+          "type": "STRING",
+          "value": "Non-Authoritative Information"
+        },
+        {
+          "type": "STRING",
+          "value": "No Content"
+        },
+        {
+          "type": "STRING",
+          "value": "Reset Content"
+        },
+        {
+          "type": "STRING",
+          "value": "Partial Content"
+        },
+        {
+          "type": "STRING",
+          "value": "Multi-Status"
+        },
+        {
+          "type": "STRING",
+          "value": "Already Reported"
+        },
+        {
+          "type": "STRING",
+          "value": "IM Used"
+        },
+        {
+          "type": "STRING",
+          "value": "Multiple Choices"
+        },
+        {
+          "type": "STRING",
+          "value": "Moved Permanently"
+        },
+        {
+          "type": "STRING",
+          "value": "Found"
+        },
+        {
+          "type": "STRING",
+          "value": "See Other"
+        },
+        {
+          "type": "STRING",
+          "value": "Not Modified"
+        },
+        {
+          "type": "STRING",
+          "value": "Use Proxy"
+        },
+        {
+          "type": "STRING",
+          "value": "Switch Proxy"
+        },
+        {
+          "type": "STRING",
+          "value": "Temporary Redirect"
+        },
+        {
+          "type": "STRING",
+          "value": "Permanent Redirect"
+        },
+        {
+          "type": "STRING",
+          "value": "Bad Request"
+        },
+        {
+          "type": "STRING",
+          "value": "Unauthorized"
+        },
+        {
+          "type": "STRING",
+          "value": "Payment Required"
+        },
+        {
+          "type": "STRING",
+          "value": "Forbidden"
+        },
+        {
+          "type": "STRING",
+          "value": "Not Found"
+        },
+        {
+          "type": "STRING",
+          "value": "Method Not Allowed"
+        },
+        {
+          "type": "STRING",
+          "value": "Not Acceptable"
+        },
+        {
+          "type": "STRING",
+          "value": "Proxy Authentication Required"
+        },
+        {
+          "type": "STRING",
+          "value": "Request Timeout"
+        },
+        {
+          "type": "STRING",
+          "value": "Conflict"
+        },
+        {
+          "type": "STRING",
+          "value": "Gone"
+        },
+        {
+          "type": "STRING",
+          "value": "Length Required"
+        },
+        {
+          "type": "STRING",
+          "value": "Precondition Failed"
+        },
+        {
+          "type": "STRING",
+          "value": "Payload Too Large"
+        },
+        {
+          "type": "STRING",
+          "value": "URI Too Long"
+        },
+        {
+          "type": "STRING",
+          "value": "Unsupported Media Type"
+        },
+        {
+          "type": "STRING",
+          "value": "Range Not Satisfiable"
+        },
+        {
+          "type": "STRING",
+          "value": "Expectation Failed"
+        },
+        {
+          "type": "STRING",
+          "value": "I'm a teapot"
+        },
+        {
+          "type": "STRING",
+          "value": "Misdirected Request"
+        },
+        {
+          "type": "STRING",
+          "value": "Unprocessable Entity"
+        },
+        {
+          "type": "STRING",
+          "value": "Locked"
+        },
+        {
+          "type": "STRING",
+          "value": "Failed Dependency"
+        },
+        {
+          "type": "STRING",
+          "value": "Too Early"
+        },
+        {
+          "type": "STRING",
+          "value": "Upgrade Required"
+        },
+        {
+          "type": "STRING",
+          "value": "Precondition Required"
+        },
+        {
+          "type": "STRING",
+          "value": "Too Many Requests"
+        },
+        {
+          "type": "STRING",
+          "value": "Request Header Fields Too Large"
+        },
+        {
+          "type": "STRING",
+          "value": "Unavailable For Legal Reasons"
+        },
+        {
+          "type": "STRING",
+          "value": "Internal Server Error"
+        },
+        {
+          "type": "STRING",
+          "value": "Not Implemented"
+        },
+        {
+          "type": "STRING",
+          "value": "Bad Gateway"
+        },
+        {
+          "type": "STRING",
+          "value": "Service Unavailable"
+        },
+        {
+          "type": "STRING",
+          "value": "Gateway Timeout"
+        },
+        {
+          "type": "STRING",
+          "value": "HTTP Version Not Supported"
+        },
+        {
+          "type": "STRING",
+          "value": "Variant Also Negotiates"
+        },
+        {
+          "type": "STRING",
+          "value": "Insufficient Storage"
+        },
+        {
+          "type": "STRING",
+          "value": "Loop Detected"
+        },
+        {
+          "type": "STRING",
+          "value": "Not Extended"
+        },
+        {
+          "type": "STRING",
+          "value": "Network Authentication Required"
+        }
+      ]
     },
     "response": {
       "type": "SEQ",
