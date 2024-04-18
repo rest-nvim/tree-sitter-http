@@ -79,7 +79,7 @@ module.exports = grammar({
 
         target_url: ($) =>
             choice(
-                seq($.path, repeat($.query_param)),
+                seq($.path, repeat($.query_param), optional(seq("#", $.fragment))),
                 seq(
                     optional(seq($.scheme, "://")),
                     optional($.authority),
