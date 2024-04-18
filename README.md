@@ -20,7 +20,7 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
 
 - [x] variable
 - [x] comment
-- [x] request 
+- [x] request
     - [x] method
     - [x] target_url
         - [x] scheme
@@ -31,6 +31,7 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
         - [ ] fragment #
     - [x] http-version
     - [x] params
+    - [x] response
     - [x] header
     - [x] body
         - [x] json
