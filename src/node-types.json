@@ -105,16 +105,17 @@
   {
     "type": "fragment",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "param",
-          "named": true
-        }
-      ]
+    "fields": {
+      "identifier": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -639,10 +640,6 @@
   },
   {
     "type": "number",
-    "named": true
-  },
-  {
-    "type": "param",
     "named": true
   },
   {

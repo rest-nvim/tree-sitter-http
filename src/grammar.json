@@ -765,8 +765,17 @@
       }
     },
     "fragment": {
-      "type": "SYMBOL",
-      "name": "param"
+      "type": "FIELD",
+      "name": "identifier",
+      "content": {
+        "type": "ALIAS",
+        "content": {
+          "type": "SYMBOL",
+          "name": "param"
+        },
+        "named": true,
+        "value": "identifier"
+      }
     },
     "host_url": {
       "type": "SEQ",
