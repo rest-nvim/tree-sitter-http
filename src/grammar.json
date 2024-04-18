@@ -1384,10 +1384,6 @@
         }
       ]
     },
-    "const_spec": {
-      "type": "PATTERN",
-      "value": "[A-Z][A-Z\\\\d_]+"
-    },
     "identifier": {
       "type": "PATTERN",
       "value": "[A-Za-z_.\\$\\d\\u00A1-\\uFFFF-]+"
