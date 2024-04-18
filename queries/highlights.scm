@@ -43,6 +43,10 @@
 
 (http_version) @constant
 
+; Response
+(status_code) @number
+(status_text) @string
+
 (string) @string
 
 (number) @number
