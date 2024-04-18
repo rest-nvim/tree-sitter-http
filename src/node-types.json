@@ -306,11 +306,11 @@
           "named": true
         },
         {
-          "type": "status",
+          "type": "status_code",
           "named": true
         },
         {
-          "type": "status_code",
+          "type": "status_text",
           "named": true
         }
       ]
@@ -651,11 +651,11 @@
     "named": false
   },
   {
-    "type": "status",
+    "type": "status_code",
     "named": true
   },
   {
-    "type": "status_code",
+    "type": "status_text",
     "named": true
   },
   {
