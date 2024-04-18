@@ -249,7 +249,6 @@ module.exports = grammar({
             )),
         ),
 
-        const_spec: (_) => /[A-Z][A-Z\\d_]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
         query_key: (_) => /[^&#=\n]+/,
         param: (_) => /[^&#\n]+/,
