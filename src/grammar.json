@@ -491,7 +491,7 @@
     },
     "status_code": {
       "type": "PATTERN",
-      "value": "[1-5][0-9][0-9]"
+      "value": "[1-5]\\d{2}"
     },
     "status": {
       "type": "PATTERN",

@@ -99,7 +99,7 @@ module.exports = grammar({
                 ),
             ),
 
-        status_code: ($) => /[1-5][0-9][0-9]/,
+        status_code: ($) => /[1-5]\d{2}/,
         status: ($) => /(OK)/,
         response: ($) => seq($.http_version, $._whitespace, $.status_code, $._whitespace, $.status),
 
