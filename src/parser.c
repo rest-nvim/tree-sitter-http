@@ -65,7 +65,7 @@ enum ts_symbol_identifiers {
   anon_sym_COLON_SLASH_SLASH = 47,
   anon_sym_QMARK = 48,
   sym_status_code = 49,
-  sym_status = 50,
+  sym_status_text = 50,
   aux_sym_request_token1 = 51,
   anon_sym_AMP = 52,
   anon_sym_EQ = 53,
@@ -180,7 +180,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_COLON_SLASH_SLASH] = "://",
   [anon_sym_QMARK] = "\?",
   [sym_status_code] = "status_code",
-  [sym_status] = "status",
+  [sym_status_text] = "status_text",
   [aux_sym_request_token1] = "request_token1",
   [anon_sym_AMP] = "&",
   [anon_sym_EQ] = "=",
@@ -295,7 +295,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_COLON_SLASH_SLASH] = anon_sym_COLON_SLASH_SLASH,
   [anon_sym_QMARK] = anon_sym_QMARK,
   [sym_status_code] = sym_status_code,
-  [sym_status] = sym_status,
+  [sym_status_text] = sym_status_text,
   [aux_sym_request_token1] = aux_sym_request_token1,
   [anon_sym_AMP] = anon_sym_AMP,
   [anon_sym_EQ] = anon_sym_EQ,
@@ -560,7 +560,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_status] = {
+  [sym_status_text] = {
     .visible = true,
     .named = true,
   },
@@ -2482,7 +2482,7 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'S') ADVANCE(71);
       END_STATE();
     case 31:
-      ACCEPT_TOKEN(sym_status);
+      ACCEPT_TOKEN(sym_status_text);
       END_STATE();
     case 32:
       if (lookahead == 'T') ADVANCE(72);
@@ -3150,7 +3150,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_HTTP_SLASH] = ACTIONS(1),
     [anon_sym_QMARK] = ACTIONS(1),
     [sym_status_code] = ACTIONS(1),
-    [sym_status] = ACTIONS(1),
+    [sym_status_text] = ACTIONS(1),
     [aux_sym_request_token1] = ACTIONS(3),
     [anon_sym_AMP] = ACTIONS(1),
     [anon_sym_EQ] = ACTIONS(1),
@@ -3450,7 +3450,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_urn,
       anon_sym_ws,
       anon_sym_wss,
-      sym_status,
+      sym_status_text,
       sym_identifier,
   [314] = 3,
     ACTIONS(3), 1,
@@ -3501,7 +3501,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_urn,
       anon_sym_ws,
       anon_sym_wss,
-      sym_status,
+      sym_status_text,
       sym_identifier,
   [368] = 5,
     ACTIONS(33), 1,
@@ -5584,7 +5584,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(29), 1,
       aux_sym__whitespace_token1,
     ACTIONS(530), 1,
-      sym_status,
+      sym_status_text,
     STATE(5), 1,
       aux_sym__whitespace,
   [3059] = 1,

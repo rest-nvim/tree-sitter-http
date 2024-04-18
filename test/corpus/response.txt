@@ -31,7 +31,7 @@ Content-Type: application/json
     (response
         (http_version)
         (status_code)
-        (status))
+        (status_text))
     (header
       name: (name)
       value: (value))
