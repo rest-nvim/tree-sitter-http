@@ -146,3 +146,26 @@ GET https://localhost:3000/api?page[number]=3&fields[available]=&available=
         key: (key))
       (query_param
         key: (key)))))
+
+=================
+Request fragment
+=================
+
+GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-contribute
+
+---
+
+(document
+    (request
+    (method)
+    (target_url
+        (scheme)
+        (host
+        (identifier))
+        (path
+        (identifier)
+        (identifier))
+        (query_param
+        (key)
+        (value))
+        (fragment))
