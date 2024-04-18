@@ -28,7 +28,7 @@ prepend it to rtp with `set rtp^=/path/to/tree-sitter-http`.
         - [x] host
         - [x] path /
         - [x] query ?
-        - [ ] fragment #
+        - [x] fragment #
     - [x] http-version
     - [x] params
     - [x] response
