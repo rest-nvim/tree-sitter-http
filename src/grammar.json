@@ -427,6 +427,27 @@
                   "type": "BLANK"
                 }
               ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "#"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "fragment"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -477,6 +498,27 @@
                         "type": "SYMBOL",
                         "name": "query_param"
                       }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "#"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "fragment"
                     }
                   ]
                 },
@@ -721,6 +763,10 @@
           }
         ]
       }
+    },
+    "fragment": {
+      "type": "SYMBOL",
+      "name": "param"
     },
     "host_url": {
       "type": "SEQ",

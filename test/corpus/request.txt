@@ -156,16 +156,17 @@ GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-cont
 ---
 
 (document
-    (request
+  (request
     (method)
     (target_url
-        (scheme)
-        (host
+      (scheme)
+      (host
         (identifier))
-        (path
+      (path
         (identifier)
         (identifier))
-        (query_param
+      (query_param
         (key)
         (value))
-        (fragment))
+      (fragment
+        (param)))))

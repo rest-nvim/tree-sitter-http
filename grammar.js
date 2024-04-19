@@ -88,6 +88,9 @@ module.exports = grammar({
                     optional(
                         seq("?", repeat1($.query_param)),
                     ),
+                    optional(
+                        seq("#", $.fragment),
+                    ),
                 ),
                 seq(
                     $.variable,
@@ -95,6 +98,9 @@ module.exports = grammar({
                     optional($.path),
                     optional(
                         seq("?", repeat1($.query_param)),
+                    ),
+                    optional(
+                        seq("#", $.fragment),
                     ),
                 ),
             ),
@@ -137,6 +143,8 @@ module.exports = grammar({
                     optional(field("value", alias($.param, $.value))),
                 ),
             ),
+
+        fragment: ($) => $.param,
 
         host_url: ($) =>
             seq(
