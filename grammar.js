@@ -158,7 +158,7 @@ module.exports = grammar({
                     optional($._whitespace),
                     field("value", alias(choice(
                         /[a-zA-Z0-9_\-\/\s]+\n/,
-                        $.host_url
+                        $.host_url,
                     ), $.value)),
                 ),
                 seq(
@@ -174,13 +174,14 @@ module.exports = grammar({
             ),
 
         // {{foo}} {{$bar}} {{ fizzbuzz }}
-        variable: ($) => seq(
-            "{{",
-            optional($._whitespace),
-            field("name", $.identifier),
-            optional($._whitespace),
-            "}}"
-        ),
+        variable: ($) =>
+            seq(
+                "{{",
+                optional($._whitespace),
+                field("name", $.identifier),
+                optional($._whitespace),
+                "}}",
+            ),
 
         script_variable: ($) =>
             seq(token(/--\{%\n/), repeat1($._line), token(/--%\}\n/)),
@@ -208,7 +209,9 @@ module.exports = grammar({
             ),
 
         // the final optional is for improving readability just in case
-        json_body: ($) => seq(choice(/\{\n/, /\[\n/), repeat1($._line), choice(/\}\n/, /\]\n/), optional(/\n/)),
+        json_body: ($) =>
+            seq(choice(/\{\n/, /\[\n/), repeat1($._line),
+                choice(/\}\n/, /\]\n/), optional(/\n/)),
 
         // the final optional is for improving readability just in case
         graphql_body: ($) =>
@@ -232,21 +235,28 @@ module.exports = grammar({
             ),
 
         // the final optional is for improving readability just in case
-        form_data: ($) => seq(
+        form_data: ($) =>
             seq(
-                field("name", $.identifier),
-                "=",
-                field("value", alias(choice($.string, $.identifier, $.number, $.boolean), $.value)),
-            ),
-            repeat(seq(
-                choice(repeat1(/\n/), "&"),
                 seq(
                     field("name", $.identifier),
                     "=",
-                    field("value", alias(choice($.string, $.identifier, $.number, $.boolean), $.value)),
+                    field("value", alias(
+                        choice($.string, $.identifier, $.number, $.boolean),
+                        $.value,
+                    )),
                 ),
-            )),
-        ),
+                repeat(seq(
+                    choice(repeat1(/\n/), "&"),
+                    seq(
+                        field("name", $.identifier),
+                        "=",
+                        field("value", alias(
+                            choice($.string, $.identifier, $.number, $.boolean),
+                            $.value,
+                        )),
+                    ),
+                )),
+            ),
 
         const_spec: (_) => /[A-Z][A-Z\\d_]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
