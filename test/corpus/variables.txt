@@ -108,6 +108,42 @@ Content-Type: application/json
       value: (value))
     (json_body)))
 
+====================================================
+Request with document variable as query param value
+====================================================
+
+@query = "value"
+
+GET https://foo.com/api/users/create?query={{query}}&query2={{ query }}
+Content-Type: application/json
+
+---
+
+(document
+  (variable_declaration
+    name: (identifier)
+    value: (string))
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)
+        (identifier)
+        (identifier))
+      (query_param
+        key: (key)
+        value: (variable
+          name: (identifier)))
+      (query_param
+        key: (key)
+        value: (variable
+          name: (identifier))))
+    (header
+      name: (name)
+      value: (value))))
 
 ===============================================
 Request with document variable as header value
