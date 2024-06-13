@@ -87,9 +87,7 @@ module.exports = grammar({
                     optional($.authority),
                     $.host,
                     optional($.path),
-                    optional(
-                        seq("?", repeat1($.query_param)),
-                    ),
+                    optional(repeat($.query_param)),
                     optional(
                         seq("#", $.fragment),
                     ),
@@ -98,9 +96,7 @@ module.exports = grammar({
                     $.variable,
                     optional($.authority),
                     optional($.path),
-                    optional(
-                        seq("?", repeat1($.query_param)),
-                    ),
+                    optional(repeat($.query_param)),
                     optional(
                         seq("#", $.fragment),
                     ),
@@ -142,10 +138,15 @@ module.exports = grammar({
         query_param: ($) =>
             prec.right(
                 seq(
-                    optional("&"),
+                    choice("&", "?"),
                     field("key", alias($.query_key, $.key)),
                     optional("="),
-                    optional(field("value", alias($.param, $.value))),
+                    optional(
+                        choice(
+                            field("value", $.variable),
+                            field("value", alias($.param, $.value)),
+                        ),
+                    ),
                 ),
             ),
 
@@ -281,7 +282,7 @@ module.exports = grammar({
 
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
         query_key: (_) => /[^&#=\n]+/,
-        param: (_) => /[^&#\n]+/,
+        param: (_) => /[^{}&#\n]+/,
         number: (_) => /[0-9]+/,
         string: (_) => /"[^"]*"/,
         boolean: (_) => choice("true", "false"),
