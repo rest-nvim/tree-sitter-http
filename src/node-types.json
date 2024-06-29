@@ -121,7 +121,17 @@
   {
     "type": "graphql_body",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "header",
@@ -624,6 +634,10 @@
   },
   {
     "type": "mid",
+    "named": false
+  },
+  {
+    "type": "mutation",
     "named": false
   },
   {
