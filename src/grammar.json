@@ -1266,13 +1266,23 @@
               "name": "identifier"
             },
             {
-              "type": "BLANK"
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "STRING",
+                  "value": "("
+                }
+              ]
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "("
         },
         {
           "type": "REPEAT1",

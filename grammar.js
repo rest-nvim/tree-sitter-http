@@ -232,8 +232,14 @@ module.exports = grammar({
             seq(
                 choice("query", "mutation"),
                 $._whitespace,
-                optional($.identifier),
-                "(",
+                choice(
+                  $.identifier,
+                  "(",
+                  seq(
+                    $.identifier,
+                    "("
+                  ),
+                ),
                 repeat1($._line),
                 /\}\n/,
                 optional(/\n/),
