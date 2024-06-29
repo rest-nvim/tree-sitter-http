@@ -98,7 +98,7 @@ Accept: application/xml
 
 
 =============
-GraphQL body
+GraphQL body query
 =============
 
 POST https://api.github.com/graphql
@@ -152,6 +152,65 @@ query ($name: String!, $owner: String!) {
       name: (name)
       value: (value))
     (graphql_body)
+    (json_body)))
+
+=============
+GraphQL body mutation with identifier
+=============
+
+POST https://api.github.com/graphql
+Content-Type: application/json
+Authorization: Bearer xxx
+X-REQUEST-TYPE: GraphQL
+
+mutation CreateRepository($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    name
+    fullName: nameWithOwner
+    description
+    diskUsage
+    forkCount
+    stargazers(first: 5) {
+        totalCount
+        nodes {
+            login
+            name
+        }
+    }
+    watchers {
+        totalCount
+    }
+  }
+}
+
+{
+    "name": "vscode-restclient",
+    "owner": "Huachao"
+}
+
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (header
+      name: (name)
+      value: (value))
+    (header
+      name: (name)
+      value: (value))
+    (graphql_body
+      (identifier))
     (json_body)))
 
 

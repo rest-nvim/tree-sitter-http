@@ -230,8 +230,9 @@ module.exports = grammar({
         // the final optional is for improving readability just in case
         graphql_body: ($) =>
             seq(
-                "query",
+                choice("query", "mutation"),
                 $._whitespace,
+                optional($.identifier),
                 "(",
                 repeat1($._line),
                 /\}\n/,

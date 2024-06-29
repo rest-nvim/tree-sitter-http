@@ -1242,12 +1242,33 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "query"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "query"
+            },
+            {
+              "type": "STRING",
+              "value": "mutation"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
           "name": "_whitespace"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
