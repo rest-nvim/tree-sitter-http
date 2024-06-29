@@ -213,6 +213,52 @@ mutation CreateRepository($name: String!, $owner: String!) {
       (identifier))
     (json_body)))
 
+=============
+GraphQL body without args
+=============
+
+POST https://api.github.com/graphql
+Content-Type: application/json
+Authorization: Bearer xxx
+X-REQUEST-TYPE: GraphQL
+
+query Foo {
+  repository {
+    name
+  }
+}
+
+{
+    "name": "vscode-restclient",
+    "owner": "Huachao"
+}
+
+
+---
+
+(document
+  (request
+    (method)
+    (target_url
+      (scheme)
+      (host
+        (identifier))
+      (path
+        (identifier)))
+    (header
+      name: (name)
+      value: (value))
+    (header
+      name: (name)
+      value: (value))
+    (header
+      name: (name)
+      value: (value))
+    (graphql_body
+      (identifier))
+    (json_body)))
+
+
 
 ===================
 External body file
