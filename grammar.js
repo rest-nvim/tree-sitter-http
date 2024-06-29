@@ -233,12 +233,12 @@ module.exports = grammar({
                 choice("query", "mutation"),
                 $._whitespace,
                 choice(
-                  $.identifier,
-                  "(",
-                  seq(
                     $.identifier,
-                    "("
-                  ),
+                    "(",
+                    seq(
+                        $.identifier,
+                        "(",
+                    ),
                 ),
                 repeat1($._line),
                 /\}\n/,
