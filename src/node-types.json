@@ -83,6 +83,25 @@
     "fields": {}
   },
   {
+    "type": "graphql_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "graphql_body",
+          "named": true
+        },
+        {
+          "type": "json_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "header",
     "named": true,
     "fields": {
@@ -171,7 +190,7 @@
             "named": true
           },
           {
-            "type": "graphql_body",
+            "type": "graphql_data",
             "named": true
           },
           {
@@ -372,10 +391,6 @@
     "named": false
   },
   {
-    "type": "(",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
@@ -397,10 +412,6 @@
   },
   {
     "type": "@",
-    "named": false
-  },
-  {
-    "type": "[",
     "named": false
   },
   {
@@ -449,10 +460,6 @@
   },
   {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "{",
     "named": false
   },
   {

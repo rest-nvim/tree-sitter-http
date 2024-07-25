@@ -125,7 +125,9 @@ query ($name: String!, $owner: String!) {
     (header
       name: (header_entity)
       value: (value))
-    body: (graphql_body)))
+    body: (graphql_data
+      (graphql_body)
+      (json_body))))
 
 =============
 GraphQL body mutation with identifier
@@ -177,7 +179,9 @@ mutation CreateRepository($name: String!, $owner: String!) {
     (header
       name: (header_entity)
       value: (value))
-    body: (graphql_body)))
+    body: (graphql_data
+      (graphql_body)
+      (json_body))))
 
 =============
 GraphQL body without args
@@ -215,7 +219,9 @@ query Foo {
     (header
       name: (header_entity)
       value: (value))
-    body: (graphql_body)))
+    body: (graphql_data
+      (graphql_body)
+      (json_body))))
 
 
 
