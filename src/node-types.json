@@ -1,21 +1,11 @@
 [
   {
-    "type": "authority",
+    "type": "boolean",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "pair",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
-    "type": "boolean",
+    "type": "comment",
     "named": true,
     "fields": {}
   },
@@ -36,11 +26,7 @@
           "named": true
         },
         {
-          "type": "script_variable",
-          "named": true
-        },
-        {
-          "type": "variable",
+          "type": "request_separator",
           "named": true
         },
         {
@@ -59,7 +45,7 @@
         "required": true,
         "types": [
           {
-            "type": "path",
+            "type": "value",
             "named": true
           }
         ]
@@ -79,59 +65,22 @@
   {
     "type": "form_data",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "value",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "fragment",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "query_param",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "graphql_body",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "header",
@@ -142,50 +91,22 @@
         "required": true,
         "types": [
           {
-            "type": "name",
+            "type": "header_entity",
             "named": true
           }
         ]
       },
       "value": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
             "type": "value",
             "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
           }
         ]
       }
     }
-  },
-  {
-    "type": "host",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "port",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "http_version",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "json_body",
@@ -193,54 +114,19 @@
     "fields": {}
   },
   {
-    "type": "pair",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "path",
+    "type": "pre_request_script",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "variable",
+          "type": "script",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "port",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "query_param",
@@ -251,7 +137,7 @@
         "required": true,
         "types": [
           {
-            "type": "key",
+            "type": "value",
             "named": true
           }
         ]
@@ -263,10 +149,6 @@
           {
             "type": "value",
             "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
           }
         ]
       }
@@ -275,23 +157,48 @@
   {
     "type": "request",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "external_body",
+            "named": true
+          },
+          {
+            "type": "form_data",
+            "named": true
+          },
+          {
+            "type": "graphql_body",
+            "named": true
+          },
+          {
+            "type": "json_body",
+            "named": true
+          },
+          {
+            "type": "xml_body",
+            "named": true
+          }
+        ]
+      },
+      "url": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "target_url",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "external_body",
-          "named": true
-        },
-        {
-          "type": "form_data",
-          "named": true
-        },
-        {
-          "type": "graphql_body",
-          "named": true
-        },
         {
           "type": "header",
           "named": true
@@ -301,23 +208,39 @@
           "named": true
         },
         {
-          "type": "json_body",
+          "type": "method",
           "named": true
         },
         {
-          "type": "method",
+          "type": "pre_request_script",
+          "named": true
+        },
+        {
+          "type": "res_handler_script",
           "named": true
         },
         {
           "type": "response",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "request_separator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "res_handler_script",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
-          "type": "target_url",
-          "named": true
-        },
-        {
-          "type": "xml_body",
+          "type": "script",
           "named": true
         }
       ]
@@ -347,12 +270,7 @@
     }
   },
   {
-    "type": "scheme",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "script_variable",
+    "type": "script",
     "named": true,
     "fields": {}
   },
@@ -362,32 +280,8 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "authority",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "host",
-          "named": true
-        },
-        {
-          "type": "path",
-          "named": true
-        },
-        {
-          "type": "query_param",
-          "named": true
-        },
-        {
-          "type": "scheme",
-          "named": true
-        },
         {
           "type": "variable",
           "named": true
@@ -398,32 +292,13 @@
   {
     "type": "value",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "authority",
-          "named": true
-        },
-        {
-          "type": "host",
-          "named": true
-        },
-        {
-          "type": "scheme",
+          "type": "variable",
           "named": true
         }
       ]
@@ -485,7 +360,11 @@
     "fields": {}
   },
   {
-    "type": "#",
+    "type": "###",
+    "named": false
+  },
+  {
+    "type": "%}",
     "named": false
   },
   {
@@ -497,15 +376,7 @@
     "named": false
   },
   {
-    "type": "/",
-    "named": false
-  },
-  {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": "://",
     "named": false
   },
   {
@@ -517,6 +388,10 @@
     "named": false
   },
   {
+    "type": ">",
+    "named": false
+  },
+  {
     "type": "?",
     "named": false
   },
@@ -525,59 +400,7 @@
     "named": false
   },
   {
-    "type": "HTTP/",
-    "named": false
-  },
-  {
-    "type": "about",
-    "named": false
-  },
-  {
-    "type": "acct",
-    "named": false
-  },
-  {
-    "type": "arcp",
-    "named": false
-  },
-  {
-    "type": "cap",
-    "named": false
-  },
-  {
-    "type": "cid",
-    "named": false
-  },
-  {
-    "type": "coap+tcp",
-    "named": false
-  },
-  {
-    "type": "coap+ws",
-    "named": false
-  },
-  {
-    "type": "coaps+tcp",
-    "named": false
-  },
-  {
-    "type": "coaps+ws",
-    "named": false
-  },
-  {
-    "type": "comment",
-    "named": true
-  },
-  {
-    "type": "data",
-    "named": false
-  },
-  {
-    "type": "dns",
-    "named": false
-  },
-  {
-    "type": "example",
+    "type": "[",
     "named": false
   },
   {
@@ -585,75 +408,23 @@
     "named": false
   },
   {
-    "type": "file",
-    "named": false
+    "type": "header_entity",
+    "named": true
   },
   {
-    "type": "ftp",
-    "named": false
-  },
-  {
-    "type": "geo",
-    "named": false
-  },
-  {
-    "type": "h323",
-    "named": false
-  },
-  {
-    "type": "http",
-    "named": false
-  },
-  {
-    "type": "https",
-    "named": false
+    "type": "http_version",
+    "named": true
   },
   {
     "type": "identifier",
     "named": true
   },
   {
-    "type": "im",
-    "named": false
-  },
-  {
-    "type": "info",
-    "named": false
-  },
-  {
-    "type": "ipp",
-    "named": false
-  },
-  {
-    "type": "key",
-    "named": true
-  },
-  {
-    "type": "mailto",
-    "named": false
-  },
-  {
     "type": "method",
     "named": true
   },
   {
-    "type": "mid",
-    "named": false
-  },
-  {
     "type": "mutation",
-    "named": false
-  },
-  {
-    "type": "name",
-    "named": true
-  },
-  {
-    "type": "ni",
-    "named": false
-  },
-  {
-    "type": "nih",
     "named": false
   },
   {
@@ -661,35 +432,7 @@
     "named": true
   },
   {
-    "type": "payto",
-    "named": false
-  },
-  {
-    "type": "pkcs11",
-    "named": false
-  },
-  {
-    "type": "pres",
-    "named": false
-  },
-  {
     "type": "query",
-    "named": false
-  },
-  {
-    "type": "reload",
-    "named": false
-  },
-  {
-    "type": "secret-token",
-    "named": false
-  },
-  {
-    "type": "session",
-    "named": false
-  },
-  {
-    "type": "sms",
     "named": false
   },
   {
@@ -705,27 +448,15 @@
     "named": true
   },
   {
-    "type": "tag",
-    "named": false
-  },
-  {
-    "type": "telnet",
-    "named": false
-  },
-  {
     "type": "true",
     "named": false
   },
   {
-    "type": "urn",
+    "type": "{",
     "named": false
   },
   {
-    "type": "ws",
-    "named": false
-  },
-  {
-    "type": "wss",
+    "type": "{%",
     "named": false
   },
   {

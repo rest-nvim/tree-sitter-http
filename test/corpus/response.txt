@@ -18,24 +18,15 @@ Content-Type: application/json
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier)
-        (port))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (response
-        (http_version)
-        (status_code)
-        (status_text))
+      (http_version)
+      (status_code)
+      (status_text))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))

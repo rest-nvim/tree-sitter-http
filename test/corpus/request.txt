@@ -9,16 +9,7 @@ GET http://localhost:3000/api/v1/users/all
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-(host
-        (identifier)
-        (port))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))))
+    url: (target_url)))
 
 
 ============================
@@ -32,11 +23,7 @@ GET https://neorg.org/
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path))))
+    url: (target_url)))
 
 
 ========================
@@ -50,16 +37,7 @@ GET https://reqres.in/api/users?page=5
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier))
-      (query_param
-        key: (key)
-        value: (value)))))
+    url: (target_url)))
 
 
 ======================================
@@ -73,25 +51,7 @@ GET https://localhost:3000/api?id[]=1&id[]=2&email=foo@bar.com&statement=2+2=4
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier)
-        (port))
-      (path
-        (identifier))
-      (query_param
-        key: (key)
-        value: (value))
-      (query_param
-        key: (key)
-        value: (value))
-      (query_param
-        key: (key)
-        value: (value))
-      (query_param
-        key: (key)
-        value: (value)))))
+    url: (target_url)))
 
 
 ======================================
@@ -105,20 +65,7 @@ GET https://localhost:3000/api?page[number]=3&fields[available]&available
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier)
-        (port))
-      (path
-        (identifier))
-      (query_param
-        key: (key)
-        value: (value))
-      (query_param
-        key: (key))
-      (query_param
-        key: (key)))))
+    url: (target_url)))
 
 
 ======================================
@@ -132,20 +79,7 @@ GET https://localhost:3000/api?page[number]=3&fields[available]=&available=
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier)
-        (port))
-      (path
-        (identifier))
-      (query_param
-        key: (key)
-        value: (value))
-      (query_param
-        key: (key))
-      (query_param
-        key: (key)))))
+    url: (target_url)))
 
 =================
 Request fragment
@@ -158,15 +92,4 @@ GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-cont
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier))
-      (query_param
-        (key)
-        (value))
-      (fragment
-        (identifier)))))
+    url: (target_url)))
