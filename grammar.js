@@ -75,7 +75,7 @@ module.exports = grammar({
                             $.external_body,
                             $.xml_body,
                             $.json_body,
-                            $.graphql_body,
+                            $.graphql_data,
                         ),
                     ),
                 ),
@@ -147,15 +147,15 @@ module.exports = grammar({
 
         json_body: ($) =>
             seq(
-                choice("{", "["),
+                token(prec(1, choice("{", "["))),
                 repeat1(LINE_TAIL),
             ),
 
-        graphql_body: ($) =>
+        graphql_data: ($) => seq($.graphql_body, optional($.json_body)),
+        graphql_body: (_) =>
             seq(
                 choice("query", "mutation"),
                 WS,
-                "(",
                 repeat1(LINE_TAIL),
             ),
 

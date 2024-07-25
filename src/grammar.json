@@ -445,7 +445,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "graphql_body"
+                      "name": "graphql_data"
                     }
                   ]
                 }
@@ -1009,17 +1009,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "{"
-            },
-            {
-              "type": "STRING",
-              "value": "["
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "{"
+                },
+                {
+                  "type": "STRING",
+                  "value": "["
+                }
+              ]
             }
-          ]
+          }
         },
         {
           "type": "REPEAT1",
@@ -1062,6 +1069,27 @@
         }
       ]
     },
+    "graphql_data": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "graphql_body"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "json_body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "graphql_body": {
       "type": "SEQ",
       "members": [
@@ -1082,10 +1110,6 @@
           "type": "PATTERN",
           "value": "\\p{Zs}+",
           "flags": "u"
-        },
-        {
-          "type": "STRING",
-          "value": "("
         },
         {
           "type": "REPEAT1",
