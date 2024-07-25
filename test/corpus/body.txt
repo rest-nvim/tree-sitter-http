@@ -1,7 +1,6 @@
 ===================
 JSON body (object)
 ===================
-
 PUT https://reqres.in/api/users/2
 Content-Type: application/json
 
@@ -15,24 +14,16 @@ Content-Type: application/json
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))
 
 
 ===================
 JSON body (array)
 ===================
-
 PUT https://reqres.in/api/users/2
 Content-Type: application/json
 
@@ -48,18 +39,11 @@ Content-Type: application/json
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))
 
 
 =========
@@ -81,20 +65,15 @@ Accept: application/xml
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)))
+    url: (target_url)
     (http_version)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (xml_body)))
+    body: (xml_body)))
 
 
 =============
@@ -136,23 +115,17 @@ query ($name: String!, $owner: String!) {
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (graphql_body)
-    (json_body)))
+    body: (graphql_body)))
 
 =============
 GraphQL body mutation with identifier
@@ -194,24 +167,17 @@ mutation CreateRepository($name: String!, $owner: String!) {
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (graphql_body
-      (identifier))
-    (json_body)))
+    body: (graphql_body)))
 
 =============
 GraphQL body without args
@@ -239,24 +205,17 @@ query Foo {
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (graphql_body
-      (identifier))
-    (json_body)))
+    body: (graphql_body)))
 
 
 
@@ -274,20 +233,12 @@ Content-Type: application/json
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (external_body
-      file_path: (path))))
+    body: (external_body
+      file_path: (value))))
 
 
 ===========
@@ -296,12 +247,8 @@ Form data
 
 POST http://localhost:1234/foo
 
-field1=value1
-
-field2=value2&field3=value3
-
-field4=value4&
-field5=value5
+field4=value4
+&field5=value5
 
 field6={{value6}}&
 field7={{value7}}
@@ -311,30 +258,11 @@ field7={{value7}}
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier)
-        (port))
-      (path
-        (identifier)))
-    (form_data
-      name: (identifier)
-      value: (value))
-    (form_data
-      name: (identifier)
-      value: (value)
-      name: (identifier)
-      value: (value))
-    (form_data
-      name: (identifier)
-      value: (value)
-      name: (identifier)
-      value: (value))
-    (form_data
-      name: (identifier)
-      value: (value
-        name: (identifier))
-      name: (identifier)
-      value: (value
-        name: (identifier)))))
+    url: (target_url)
+    body: (form_data
+      (query_param
+        key: (value)
+        value: (value))
+      (query_param
+        key: (value)
+        value: (value)))))

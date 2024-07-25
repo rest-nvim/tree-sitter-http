@@ -22,17 +22,11 @@ Content-Type: application/json
 (document
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))
 
 
 ================================
@@ -65,18 +59,11 @@ Content-Type: application/json
     value: (text))
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))
 
 
 ==========================================
@@ -101,16 +88,13 @@ Content-Type: application/json
     value: (string))
   (request
     (method)
-    (target_url
+    url: (target_url
       (variable
-        name: (identifier))
-      (path
-        (identifier)
-        (identifier)))
+        name: (identifier)))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))
-    (json_body)))
+    body: (json_body)))
 
 ====================================================
 Request with document variable as query param value
@@ -129,24 +113,13 @@ Content-Type: application/json
     value: (string))
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier))
-      (query_param
-        key: (key)
-        value: (variable
-          name: (identifier)))
-      (query_param
-        key: (key)
-        value: (variable
-          name: (identifier))))
+    url: (target_url
+      (variable
+        name: (identifier))
+      (variable
+        name: (identifier)))
     (header
-      name: (name)
+      name: (header_entity)
       value: (value))))
 
 ===============================================
@@ -171,19 +144,13 @@ Content-Type: {{ content }}
     value: (string))
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier)
-        (identifier)))
+    url: (target_url)
     (header
-      name: (name)
-      value: (variable
-        name: (identifier)))
-    (json_body)))
+      name: (header_entity)
+      value: (value
+        (variable
+          name: (identifier))))
+    body: (json_body)))
 
 
 ==================================
@@ -194,14 +161,14 @@ Request with Lua script variables
 # Then the second request can be run
 GET https://jsonplaceholder.typicode.com/posts/3
 
---{%
+> {%
 
 local body = context.json_decode(context.result.body)
 
 context.set_env("userId", body.userId)
 context.set_env("postId", body.id)
 
---%}
+%}
 
 ###
 GET https://jsonplaceholder.typicode.com/posts/{{postId}}
@@ -213,22 +180,12 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
   (comment)
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (identifier))))
-  (script_variable)
-  (comment)
+    url: (target_url)
+    (res_handler_script
+      (script)))
+  (request_separator)
   (request
     (method)
-    (target_url
-      (scheme)
-      (host
-        (identifier))
-      (path
-        (identifier)
-        (variable
-          name: (identifier))))))
+    url: (target_url
+      (variable
+        name: (identifier)))))

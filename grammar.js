@@ -1,126 +1,75 @@
-const NL = token.immediate(/[\r\n]+/);
+const WORD_CHAR = /[\p{L}\p{N}]/u;
+const PUNCTUATION = /[^\n\r\p{Z}\p{L}\p{N}]/u;
+const WS = /\p{Zs}+/u;
+const NL = token(choice("\n", "\r", "\r\n", "\0"));
+const LINE_TAIL = token(seq(/.*/, NL));
 
 module.exports = grammar({
     name: "http",
 
     word: ($) => $.identifier,
-    extras: ($) => [NL],
+    extras: ($) => [],
+    conflicts: ($) => [[$.target_url]],
+    inline: ($) => [$._target_url_line],
 
     rules: {
         document: ($) =>
             repeat(
                 choice(
-                    $.variable,
-                    $.script_variable,
                     $.variable_declaration,
                     $.comment,
+                    $.request_separator,
+                    $._blank_line,
                     $.request,
                 ),
             ),
 
-        comment: (_) => token(seq("#", /.*/)),
+        comment: (_) => seq(token(prec(1, choice("#", "//"))), LINE_TAIL),
+        request_separator: (_) => seq(token(prec(1, "###")), LINE_TAIL),
 
         // LIST http verb is arbitrary and required to use vaultproject
-        method: ($) =>
-            /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)/,
+        method: (_) => /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST)/,
 
-        host: ($) => seq($.identifier, optional($.port)),
-        port: ($) => seq(":", /\d+/),
-        path: ($) =>
+        http_version: (_) => token(prec(0, /HTTP\/[\d\.]+/)),
+
+        _target_url_line: ($) =>
             repeat1(
                 choice(
-                    "/",
-                    seq("/", $.identifier, optional("/")),
-                    seq("/", $.variable, optional("/")),
-                ),
-            ),
-        scheme: (_) =>
-            choice(
-                "about",
-                "acct",
-                "arcp",
-                "cap",
-                "cid",
-                "coap+tcp",
-                "coap+ws",
-                "coaps+tcp",
-                "coaps+ws",
-                "data",
-                "dns",
-                "example",
-                "file",
-                "ftp",
-                "geo",
-                "h323",
-                "http",
-                "https",
-                "im",
-                "info",
-                "ipp",
-                "mailto",
-                "mid",
-                "ni",
-                "nih",
-                "payto",
-                "pkcs11",
-                "pres",
-                "reload",
-                "secret-token",
-                "session",
-                "sms",
-                "tag",
-                "telnet",
-                "urn",
-                "ws",
-                "wss",
-            ),
-
-        authority: ($) => seq(optional($.pair), "@"),
-        http_version: (_) => seq("HTTP/", /[\d\.]+/),
-
-        target_url: ($) =>
-            choice(
-                seq($.path, repeat($.query_param),
-                    optional(seq("#", $.fragment))),
-                seq(
-                    optional(seq($.scheme, "://")),
-                    optional($.authority),
-                    $.host,
-                    optional($.path),
-                    optional(repeat($.query_param)),
-                    optional(
-                        seq("#", $.fragment),
-                    ),
-                ),
-                seq(
+                    WORD_CHAR,
+                    "?",
+                    PUNCTUATION,
                     $.variable,
-                    optional($.authority),
-                    optional($.path),
-                    optional(repeat($.query_param)),
-                    optional(
-                        seq("#", $.fragment),
+                ),
+            ),
+        target_url: ($) =>
+            seq(
+                $._target_url_line,
+                repeat(
+                    seq(
+                        NL,
+                        WS,
+                        $._target_url_line,
                     ),
                 ),
             ),
 
         status_code: ($) => /[1-5]\d{2}/,
-        status_text: ($) =>
-            /(Continue|Switching Protocols|Processing|OK|Created|Accepted|Non-Authoritative Information|No Content|Reset Content|Partial Content|Multi-Status|Already Reported|IM Used|Multiple Choices|Moved Permanently|Found|See Other|Not Modified|Use Proxy|Switch Proxy|Temporary Redirect|Permanent Redirect|Bad Request|Unauthorized|Payment Required|Forbidden|Not Found|Method Not Allowed|Not Acceptable|Proxy Authentication Required|Request Timeout|Conflict|Gone|Length Required|Precondition Failed|Payload Too Large|URI Too Long|Unsupported Media Type|Range Not Satisfiable|Expectation Failed|I'm a teapot|Misdirected Request|Unprocessable Entity|Locked|Failed Dependency|Too Early|Upgrade Required|Precondition Required|Too Many Requests|Request Header Fields Too Large|Unavailable For Legal Reasons|Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)/,
-        response: ($) =>
-            seq($.http_version, $._whitespace, $.status_code, $._whitespace,
-                $.status_text),
+        status_text: ($) => /(Continue|Switching Protocols|Processing|OK|Created|Accepted|Non-Authoritative Information|No Content|Reset Content|Partial Content|Multi-Status|Already Reported|IM Used|Multiple Choices|Moved Permanently|Found|See Other|Not Modified|Use Proxy|Switch Proxy|Temporary Redirect|Permanent Redirect|Bad Request|Unauthorized|Payment Required|Forbidden|Not Found|Method Not Allowed|Not Acceptable|Proxy Authentication Required|Request Timeout|Conflict|Gone|Length Required|Precondition Failed|Payload Too Large|URI Too Long|Unsupported Media Type|Range Not Satisfiable|Expectation Failed|I'm a teapot|Misdirected Request|Unprocessable Entity|Locked|Failed Dependency|Too Early|Upgrade Required|Precondition Required|Too Many Requests|Request Header Fields Too Large|Unavailable For Legal Reasons|Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)/,
+        response: ($) => seq($.http_version, WS, $.status_code, WS, $.status_text),
 
         request: ($) =>
-            prec.right(
-                seq(
-                    $.method,
-                    $._whitespace,
-                    $.target_url,
-                    optional(seq($._whitespace, $.http_version)),
-                    optional(seq(NL, $.response)),
-                    NL,
-                    repeat($.header),
-                    repeat(
+            prec.right(seq(
+                optional($.pre_request_script),
+                optional(seq($.method, WS)),
+                field("url", $.target_url),
+                optional(seq(WS, $.http_version)),
+                NL,
+                optional(seq($.response, NL)),
+                repeat($.header),
+                repeat($._blank_line),
+                optional(
+                    field(
+                        "body",
                         choice(
                             $.form_data,
                             $.external_body,
@@ -130,168 +79,116 @@ module.exports = grammar({
                         ),
                     ),
                 ),
-            ),
-
-        pair: ($) =>
-            seq(field("name", $.identifier), ":", field("value", $.identifier)),
+                optional($.res_handler_script),
+            )),
 
         query_param: ($) =>
             prec.right(
                 seq(
-                    choice("&", "?"),
-                    field("key", alias($.query_key, $.key)),
-                    optional("="),
+                    field("key", $.value),
                     optional(
-                        choice(
-                            field("value", $.variable),
-                            field("value", alias($.param, $.value)),
+                        seq(
+                            "=",
+                            optional(field("value", $.value)),
                         ),
                     ),
                 ),
             ),
 
-        fragment: ($) => field("identifier", alias($.param, $.identifier)),
-
-        host_url: ($) =>
-            seq(
-                optional(seq($.scheme, "://")),
-                optional($.authority),
-                $.host,
-            ),
-
         header: ($) =>
-            choice(
-                prec.left(seq(
-                    field("name", alias($.identifier, $.name)),
-                    ":",
-                    optional($._whitespace),
-                    field("value", $.variable),
+            seq(
+                field("name", $.header_entity),
+                optional(WS),
+                ":",
+                optional(token(prec(1, WS))),
+                field("value", choice(
+                    $.value,
                 )),
-                seq(
-                    field("name", alias($.identifier, $.name)),
-                    ":",
-                    optional($._whitespace),
-                    field("value", alias(choice(
-                        /[a-zA-Z0-9_\-\/\s]+\n/,
-                        $.host_url,
-                    ), $.value)),
-                ),
-                seq(
-                    field("name", alias($.identifier, $.name)),
-                    ":",
-                    optional($._whitespace),
-                    field("value", alias(seq(
-                        /[a-zA-Z0-9_\-\/]+/,
-                        $._whitespace,
-                        $.variable,
-                    ), $.value)),
-                ),
+                NL,
             ),
 
         // {{foo}} {{$bar}} {{ fizzbuzz }}
-        variable: ($) =>
-            seq(
-                "{{",
-                optional($._whitespace),
-                field("name", $.identifier),
-                optional($._whitespace),
-                "}}",
-            ),
+        variable: ($) => seq(
+            token(prec(1, "{{")),
+            optional(WS),
+            field("name", $.identifier),
+            optional(WS),
+            token(prec(1, "}}")),
+        ),
 
-        script_variable: ($) =>
-            seq(token(/--\{%\n/), repeat1($._line), token(/--%\}\n/)),
+        pre_request_script: ($) => seq("<", WS, $.script, NL),
+        res_handler_script: ($) => seq(token(prec(1, ">")), WS, $.script, NL),
+        script: ($) =>
+            seq(
+                token(prec(1, "{%")),
+                NL,
+                repeat(LINE_TAIL),
+                token(prec(1, "%}")),
+            ),
 
         variable_declaration: ($) =>
             seq(
                 "@",
                 field("name", $.identifier),
                 seq(
-                    optional($._whitespace),
+                    optional(WS),
                     "=",
-                    optional($._whitespace),
-                    field("value",
-                        choice($.number, $.boolean, $.string, $.text)),
+                    optional(WS),
+                    field("value", choice($.number, $.boolean, $.string)),
                 ),
+                NL,
             ),
 
-        // the final optional is for improving readability just in case
         xml_body: ($) =>
             seq(
-                /<\?xml.*\?>/,
-                NL,
-                repeat1($._line),
-                /<\/.*>\n/,
-                optional(/\n/),
+                token(prec(1, /<\S/)),
+                repeat1(LINE_TAIL),
             ),
 
-        // the final optional is for improving readability just in case
         json_body: ($) =>
-            seq(choice(/\{\n/, /\[\n/), repeat1($._line),
-                choice(/\}\n/, /\]\n/), optional(/\n/)),
+            seq(
+                choice("{", "["),
+                repeat1(LINE_TAIL),
+            ),
 
-        // the final optional is for improving readability just in case
         graphql_body: ($) =>
             seq(
                 choice("query", "mutation"),
-                $._whitespace,
-                choice(
-                    $.identifier,
-                    "(",
-                    seq(
-                        $.identifier,
-                        "(",
-                    ),
-                ),
-                repeat1($._line),
-                /\}\n/,
-                optional(/\n/),
+                WS,
+                "(",
+                repeat1(LINE_TAIL),
             ),
 
-        // the final optional is for improving readability just in case
         external_body: ($) =>
             seq(
                 "<",
                 optional(seq("@", $.identifier)),
-                $._whitespace,
-                field("file_path", alias($._line, $.path)),
-                optional(/\n/),
+                WS,
+                field("file_path", $.value),
+                NL,
             ),
 
-        // the final optional is for improving readability just in case
         form_data: ($) =>
             seq(
-                seq(
-                    field("name", $.identifier),
-                    "=",
-                    field("value", alias(
-                        choice($.string, $.identifier, $.number, $.boolean,
-                            $.variable),
-                        $.value,
-                    )),
-                ),
-                repeat(seq(
-                    choice(repeat1(/\n/), "&"),
-                    seq(
-                        field("name", $.identifier),
-                        "=",
-                        field("value", alias(
-                            choice($.string, $.identifier, $.number, $.boolean,
-                                $.variable),
-                            $.value,
-                        )),
-                    ),
-                )),
+                $.query_param,
+                repeat(seq(optional(NL), token(prec(1, "&")), $.query_param)),
+                NL,
             ),
 
+        header_entity: (_) => /[\w\-]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
-        query_key: (_) => /[^&#=\n]+/,
-        param: (_) => /[^{}&#\n]+/,
         number: (_) => /[0-9]+/,
-        string: (_) => /"[^"]*"/,
+        string: (_) => /"[^"\n\r]*"/,
         boolean: (_) => choice("true", "false"),
-        text: (_) => /[^\t\v\n ]+[^\n]*/,
-        _whitespace: (_) => repeat1(/[\t\v ]/),
-        _newline: (_) => repeat1(/[\n]/),
-        _line: (_) => /[^\n]+/,
+        value: ($) =>
+            repeat1(
+                choice(
+                    WORD_CHAR,
+                    PUNCTUATION,
+                    $.variable,
+                    WS,
+                ),
+            ),
+        _blank_line: (_) => seq(optional(WS), token(prec(-1, NL))),
     },
 });
