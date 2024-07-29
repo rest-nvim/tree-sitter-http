@@ -303,6 +303,9 @@ field2=value2&field3=value3
 field4=value4&
 field5=value5
 
+field6={{value6}}&
+field7={{value7}}
+
 ---
 
 (document
@@ -327,4 +330,11 @@ field5=value5
       name: (identifier)
       value: (value)
       name: (identifier)
-      value: (value))))
+      value: (value))
+    (form_data
+      name: (identifier)
+      value: (value
+        name: (identifier))
+      name: (identifier)
+      value: (value
+        name: (identifier)))))

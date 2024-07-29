@@ -474,6 +474,10 @@
           {
             "type": "string",
             "named": true
+          },
+          {
+            "type": "text",
+            "named": true
           }
         ]
       }
@@ -711,6 +715,10 @@
   {
     "type": "telnet",
     "named": false
+  },
+  {
+    "type": "text",
+    "named": true
   },
   {
     "type": "true",
