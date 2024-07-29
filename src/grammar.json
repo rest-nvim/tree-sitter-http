@@ -1137,6 +1137,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "string"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "text"
                   }
                 ]
               }
@@ -1405,6 +1409,10 @@
                     {
                       "type": "SYMBOL",
                       "name": "boolean"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "variable"
                     }
                   ]
                 },
@@ -1473,6 +1481,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "boolean"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "variable"
                           }
                         ]
                       },
@@ -1519,6 +1531,10 @@
           "value": "false"
         }
       ]
+    },
+    "text": {
+      "type": "PATTERN",
+      "value": "[^\\t\\v\\n ]+[^\\n]*"
     },
     "_whitespace": {
       "type": "REPEAT1",

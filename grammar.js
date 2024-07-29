@@ -263,7 +263,7 @@ module.exports = grammar({
                     field("name", $.identifier),
                     "=",
                     field("value", alias(
-                        choice($.string, $.identifier, $.number, $.boolean),
+                        choice($.string, $.identifier, $.number, $.boolean, $.variable),
                         $.value,
                     )),
                 ),
@@ -273,7 +273,7 @@ module.exports = grammar({
                         field("name", $.identifier),
                         "=",
                         field("value", alias(
-                            choice($.string, $.identifier, $.number, $.boolean),
+                            choice($.string, $.identifier, $.number, $.boolean, $.variable),
                             $.value,
                         )),
                     ),
