@@ -41,6 +41,7 @@ Request with document variables
 
 @username = "NTBBloodbath"
 @admin = true
+@address = Neovim Land
 
 POST https://foo.com/api/users/create
 Content-Type: application/json
@@ -59,6 +60,9 @@ Content-Type: application/json
   (variable_declaration
     name: (identifier)
     value: (boolean))
+  (variable_declaration
+    name: (identifier)
+    value: (text))
   (request
     (method)
     (target_url

@@ -209,7 +209,7 @@ module.exports = grammar({
                     optional($._whitespace),
                     "=",
                     optional($._whitespace),
-                    field("value", choice($.number, $.boolean, $.string)),
+                    field("value", choice($.number, $.boolean, $.string, $.text)),
                 ),
             ),
 
@@ -286,6 +286,7 @@ module.exports = grammar({
         number: (_) => /[0-9]+/,
         string: (_) => /"[^"]*"/,
         boolean: (_) => choice("true", "false"),
+        text: (_) => /[^\t\v\n ]+[^\n]*/,
         _whitespace: (_) => repeat1(/[\t\v ]/),
         _newline: (_) => repeat1(/[\n]/),
         _line: (_) => /[^\n]+/,
