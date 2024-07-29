@@ -209,7 +209,8 @@ module.exports = grammar({
                     optional($._whitespace),
                     "=",
                     optional($._whitespace),
-                    field("value", choice($.number, $.boolean, $.string, $.text)),
+                    field("value",
+                        choice($.number, $.boolean, $.string, $.text)),
                 ),
             ),
 
@@ -263,7 +264,8 @@ module.exports = grammar({
                     field("name", $.identifier),
                     "=",
                     field("value", alias(
-                        choice($.string, $.identifier, $.number, $.boolean, $.variable),
+                        choice($.string, $.identifier, $.number, $.boolean,
+                            $.variable),
                         $.value,
                     )),
                 ),
@@ -273,7 +275,8 @@ module.exports = grammar({
                         field("name", $.identifier),
                         "=",
                         field("value", alias(
-                            choice($.string, $.identifier, $.number, $.boolean, $.variable),
+                            choice($.string, $.identifier, $.number, $.boolean,
+                                $.variable),
                             $.value,
                         )),
                     ),
