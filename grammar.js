@@ -62,13 +62,13 @@ module.exports = grammar({
 
         request: ($) =>
             prec.right(seq(
-                optional($.pre_request_script),
-                optional(seq($.method, WS)),
+                repeat(field("pre_request_script", $.pre_request_script)),
+                optional(seq(field("method", $.method), WS)),
                 field("url", $.target_url),
-                optional(seq(WS, $.http_version)),
+                optional(seq(WS, field("version", $.http_version))),
                 NL,
                 optional(seq($.response, NL)),
-                repeat($.header),
+                repeat(field("header", $.header)),
                 repeat($._blank_line),
                 optional(
                     field(
@@ -82,7 +82,7 @@ module.exports = grammar({
                         ),
                     ),
                 ),
-                optional($.res_handler_script),
+                repeat(field("handler_script", $.res_handler_script)),
             )),
 
         query_param: ($) =>
@@ -134,12 +134,11 @@ module.exports = grammar({
             seq(
                 "@",
                 field("name", $.identifier),
-                seq(
-                    optional(WS),
-                    "=",
-                    optional(WS),
-                    field("value", choice($.number, $.boolean, $.string)),
-                ),
+                optional(WS),
+                "=",
+                optional(token(prec(1, WS))),
+                // TODO: remove number, boolean, string to provide variable declaration with variables
+                field("value", $.value),
                 NL,
             ),
 
@@ -166,9 +165,9 @@ module.exports = grammar({
         external_body: ($) =>
             seq(
                 "<",
-                optional(seq("@", $.identifier)),
+                optional(seq("@", field("name", $.identifier))),
                 WS,
-                field("file_path", $.value),
+                field("path", $.value),
                 NL,
             ),
 

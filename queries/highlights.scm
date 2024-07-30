@@ -35,12 +35,6 @@
 (status_code) @number
 (status_text) @string
 
-(string) @string
-
-(number) @number
-
-(boolean) @boolean
-
 ; Punctuation
 [
   "{{"
@@ -51,7 +45,7 @@
 
 ; external JSON body
 (external_body
-  file_path: (_) @string.special.path)
+  path: (_) @string.special.path)
 
 ; Comments
 (comment) @comment @spell
