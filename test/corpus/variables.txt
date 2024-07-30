@@ -21,9 +21,9 @@ Content-Type: application/json
 
 (document
   (request
-    (method)
+    method: (method)
     url: (target_url)
-    (header
+    header: (header
       name: (header_entity)
       value: (value))
     body: (json_body)))
@@ -49,14 +49,14 @@ Content-Type: application/json
 (document
   (variable_declaration
     name: (identifier)
-    value: (string))
+    value: (value))
   (variable_declaration
     name: (identifier)
-    value: (boolean))
+    value: (value))
   (request
-    (method)
+    method: (method)
     url: (target_url)
-    (header
+    header: (header
       name: (header_entity)
       value: (value))
     body: (json_body)))
@@ -81,13 +81,13 @@ Content-Type: application/json
 (document
   (variable_declaration
     name: (identifier)
-    value: (string))
+    value: (value))
   (request
-    (method)
+    method: (method)
     url: (target_url
       (variable
         name: (identifier)))
-    (header
+    header: (header
       name: (header_entity)
       value: (value))
     body: (json_body)))
@@ -106,15 +106,15 @@ Content-Type: application/json
 (document
   (variable_declaration
     name: (identifier)
-    value: (string))
+    value: (value))
   (request
-    (method)
+    method: (method)
     url: (target_url
       (variable
         name: (identifier))
       (variable
         name: (identifier)))
-    (header
+    header: (header
       name: (header_entity)
       value: (value))))
 
@@ -137,11 +137,11 @@ Content-Type: {{ content }}
 (document
   (variable_declaration
     name: (identifier)
-    value: (string))
+    value: (value))
   (request
-    (method)
+    method: (method)
     url: (target_url)
-    (header
+    header: (header
       name: (header_entity)
       value: (value
         (variable
@@ -175,13 +175,13 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
   (comment)
   (comment)
   (request
-    (method)
+    method: (method)
     url: (target_url)
-    (res_handler_script
+    handler_script: (res_handler_script
       (script)))
   (request_separator)
   (request
-    (method)
+    method: (method)
     url: (target_url
       (variable
         name: (identifier)))))

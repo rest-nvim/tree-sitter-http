@@ -1,10 +1,5 @@
 [
   {
-    "type": "boolean",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -40,7 +35,17 @@
     "type": "external_body",
     "named": true,
     "fields": {
-      "file_path": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "path": {
         "multiple": false,
         "required": true,
         "types": [
@@ -50,16 +55,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -203,6 +198,46 @@
           }
         ]
       },
+      "handler_script": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "res_handler_script",
+            "named": true
+          }
+        ]
+      },
+      "header": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "header",
+            "named": true
+          }
+        ]
+      },
+      "method": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "method",
+            "named": true
+          }
+        ]
+      },
+      "pre_request_script": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "pre_request_script",
+            "named": true
+          }
+        ]
+      },
       "url": {
         "multiple": false,
         "required": true,
@@ -212,32 +247,22 @@
             "named": true
           }
         ]
+      },
+      "version": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "http_version",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "header",
-          "named": true
-        },
-        {
-          "type": "http_version",
-          "named": true
-        },
-        {
-          "type": "method",
-          "named": true
-        },
-        {
-          "type": "pre_request_script",
-          "named": true
-        },
-        {
-          "type": "res_handler_script",
-          "named": true
-        },
         {
           "type": "response",
           "named": true
@@ -358,15 +383,7 @@
         "required": true,
         "types": [
           {
-            "type": "boolean",
-            "named": true
-          },
-          {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "string",
+            "type": "value",
             "named": true
           }
         ]
@@ -439,10 +456,6 @@
     "named": false
   },
   {
-    "type": "number",
-    "named": true
-  },
-  {
     "type": "query",
     "named": false
   },
@@ -452,10 +465,6 @@
   },
   {
     "type": "status_text",
-    "named": true
-  },
-  {
-    "type": "string",
     "named": true
   },
   {
