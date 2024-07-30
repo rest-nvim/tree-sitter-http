@@ -7,7 +7,6 @@ const LINE_TAIL = token(seq(/.*/, NL));
 module.exports = grammar({
     name: "http",
 
-    word: ($) => $.identifier,
     extras: ($) => [],
     conflicts: ($) => [[$.target_url]],
     inline: ($) => [$._target_url_line],
@@ -16,13 +15,18 @@ module.exports = grammar({
         document: ($) =>
             repeat(
                 choice(
+                    $.pre_request_script,
                     $.variable_declaration,
                     $.comment,
                     $.request_separator,
                     $._blank_line,
                     $.request,
+                    $.res_handler_script,
                 ),
             ),
+        // NOTE: just for debugging purpose
+        WS: (_) => WS,
+        NL: (_) => NL,
 
         comment: (_) => seq(token(prec(1, choice("#", "//"))), LINE_TAIL),
         request_separator: (_) => seq(token(prec(1, "###")), LINE_TAIL),
@@ -37,7 +41,6 @@ module.exports = grammar({
             repeat1(
                 choice(
                     WORD_CHAR,
-                    "?",
                     PUNCTUATION,
                     $.variable,
                 ),
@@ -62,14 +65,13 @@ module.exports = grammar({
 
         request: ($) =>
             prec.right(seq(
-                repeat(field("pre_request_script", $.pre_request_script)),
                 optional(seq(field("method", $.method), WS)),
                 field("url", $.target_url),
                 optional(seq(WS, field("version", $.http_version))),
-                NL,
-                optional(seq($.response, NL)),
+                NL, repeat($.comment),
+                optional(seq($.response, NL, repeat($.comment))),
                 repeat(field("header", $.header)),
-                repeat($._blank_line),
+                optional(seq(repeat1($._blank_line), repeat($.comment))),
                 optional(
                     field(
                         "body",
@@ -82,7 +84,6 @@ module.exports = grammar({
                         ),
                     ),
                 ),
-                repeat(field("handler_script", $.res_handler_script)),
             )),
 
         query_param: ($) =>

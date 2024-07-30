@@ -177,9 +177,9 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
   (comment)
   (request
     method: (method)
-    url: (target_url)
-    handler_script: (res_handler_script
-      (script)))
+    url: (target_url))
+  (res_handler_script
+    (script))
   (request_separator)
   (request
     method: (method)

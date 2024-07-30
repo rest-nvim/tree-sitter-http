@@ -17,11 +17,19 @@
           "named": true
         },
         {
+          "type": "pre_request_script",
+          "named": true
+        },
+        {
           "type": "request",
           "named": true
         },
         {
           "type": "request_separator",
+          "named": true
+        },
+        {
+          "type": "res_handler_script",
           "named": true
         },
         {
@@ -198,16 +206,6 @@
           }
         ]
       },
-      "handler_script": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "res_handler_script",
-            "named": true
-          }
-        ]
-      },
       "header": {
         "multiple": true,
         "required": false,
@@ -224,16 +222,6 @@
         "types": [
           {
             "type": "method",
-            "named": true
-          }
-        ]
-      },
-      "pre_request_script": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "pre_request_script",
             "named": true
           }
         ]
@@ -260,9 +248,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "response",
           "named": true
@@ -425,10 +417,6 @@
   },
   {
     "type": ">",
-    "named": false
-  },
-  {
-    "type": "?",
     "named": false
   },
   {
