@@ -15,13 +15,8 @@ module.exports = grammar({
         document: ($) =>
             repeat(
                 choice(
-                    $.pre_request_script,
-                    $.variable_declaration,
-                    $.comment,
-                    $.request_separator,
-                    $._blank_line,
-                    $.request,
-                    $.res_handler_script,
+                    prec.right(repeat1($.request_separator)),
+                    $.request_section,
                 ),
             ),
         // NOTE: just for debugging purpose
@@ -30,6 +25,23 @@ module.exports = grammar({
 
         comment: (_) => seq(token(prec(1, choice("#", "//"))), LINE_TAIL),
         request_separator: (_) => seq(token(prec(1, "###")), LINE_TAIL),
+
+        request_section: ($) =>
+            prec.right(seq(
+                repeat($.request_separator),
+                // NOTE: grammatically, each request section should contain only single `$.request` node
+                // we are allowing multiple `$.request` nodes here to lower the parser size
+                repeat1(
+                    choice(
+                        $._blank_line,
+                        $.comment,
+                        $.variable_declaration,
+                        $.pre_request_script,
+                        field("request", $.request),
+                        $.res_handler_script,
+                    )
+                )
+            )),
 
         // LIST http verb is arbitrary and required to use vaultproject
         method: (_) =>
