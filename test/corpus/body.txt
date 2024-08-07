@@ -12,13 +12,14 @@ Content-Type: application/json
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
       name: (header_entity)
       value: (value))
-    body: (json_body)))
+    body: (json_body))))
 
 
 ===================
@@ -37,13 +38,14 @@ Content-Type: application/json
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
       name: (header_entity)
       value: (value))
-    body: (json_body)))
+    body: (json_body))))
 
 
 =========
@@ -63,7 +65,8 @@ Accept: application/xml
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     version: (http_version)
@@ -73,7 +76,7 @@ Accept: application/xml
     header: (header
       name: (header_entity)
       value: (value))
-    body: (xml_body)))
+    body: (xml_body))))
 
 
 =============
@@ -113,7 +116,8 @@ query ($name: String!, $owner: String!) {
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
@@ -127,7 +131,7 @@ query ($name: String!, $owner: String!) {
       value: (value))
     body: (graphql_data
       (graphql_body)
-      (json_body))))
+      (json_body)))))
 
 =============
 GraphQL body mutation with identifier
@@ -167,7 +171,8 @@ mutation CreateRepository($name: String!, $owner: String!) {
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
@@ -181,7 +186,7 @@ mutation CreateRepository($name: String!, $owner: String!) {
       value: (value))
     body: (graphql_data
       (graphql_body)
-      (json_body))))
+      (json_body)))))
 
 =============
 GraphQL body without args
@@ -207,7 +212,8 @@ query Foo {
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
@@ -221,7 +227,7 @@ query Foo {
       value: (value))
     body: (graphql_data
       (graphql_body)
-      (json_body))))
+      (json_body)))))
 
 
 
@@ -237,14 +243,15 @@ Content-Type: application/json
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
       name: (header_entity)
       value: (value))
     body: (external_body
-      path: (value))))
+      path: (value)))))
 
 
 ===========
@@ -262,7 +269,8 @@ field7={{value7}}
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     body: (form_data
@@ -271,4 +279,4 @@ field7={{value7}}
         value: (value))
       (query_param
         key: (value)
-        value: (value)))))
+        value: (value))))))

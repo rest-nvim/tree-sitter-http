@@ -7,32 +7,19 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "pre_request_script"
+            "type": "PREC_RIGHT",
+            "value": 0,
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "request_separator"
+              }
+            }
           },
           {
             "type": "SYMBOL",
-            "name": "variable_declaration"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "comment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "request_separator"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_blank_line"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "request"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "res_handler_script"
+            "name": "request_section"
           }
         ]
       }
@@ -178,6 +165,58 @@
           }
         }
       ]
+    },
+    "request_section": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "request_separator"
+            }
+          },
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_blank_line"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "comment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "variable_declaration"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "pre_request_script"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "request",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "request"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "res_handler_script"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     "method": {
       "type": "PATTERN",
