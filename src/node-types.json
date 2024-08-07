@@ -13,27 +13,11 @@
       "required": false,
       "types": [
         {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "pre_request_script",
-          "named": true
-        },
-        {
-          "type": "request",
+          "type": "request_section",
           "named": true
         },
         {
           "type": "request_separator",
-          "named": true
-        },
-        {
-          "type": "res_handler_script",
-          "named": true
-        },
-        {
-          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -257,6 +241,48 @@
         },
         {
           "type": "response",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "request_section",
+    "named": true,
+    "fields": {
+      "request": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "request",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "pre_request_script",
+          "named": true
+        },
+        {
+          "type": "request_separator",
+          "named": true
+        },
+        {
+          "type": "res_handler_script",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
           "named": true
         }
       ]

@@ -20,13 +20,14 @@ Content-Type: application/json
 ---
 
 (document
-  (request
+  (request_section
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
       name: (header_entity)
       value: (value))
-    body: (json_body)))
+    body: (json_body))))
 
 
 ================================
@@ -48,19 +49,20 @@ Content-Type: application/json
 ---
 
 (document
+  (request_section
   (variable_declaration
     name: (identifier)
     value: (value))
   (variable_declaration
     name: (identifier)
     value: (value))
-  (request
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
       name: (header_entity)
       value: (value))
-    body: (json_body)))
+    body: (json_body))))
 
 
 ==========================================
@@ -80,10 +82,11 @@ Content-Type: application/json
 ---
 
 (document
+  (request_section
   (variable_declaration
     name: (identifier)
     value: (value))
-  (request
+  request: (request
     method: (method)
     url: (target_url
       (variable
@@ -91,7 +94,7 @@ Content-Type: application/json
     header: (header
       name: (header_entity)
       value: (value))
-    body: (json_body)))
+    body: (json_body))))
 
 ====================================================
 Request with document variable as query param value
@@ -105,10 +108,11 @@ Content-Type: application/json
 ---
 
 (document
+  (request_section
   (variable_declaration
     name: (identifier)
     value: (value))
-  (request
+  request: (request
     method: (method)
     url: (target_url
       (variable
@@ -117,7 +121,7 @@ Content-Type: application/json
         name: (identifier)))
     header: (header
       name: (header_entity)
-      value: (value))))
+      value: (value)))))
 
 ===============================================
 Request with document variable as header value
@@ -136,10 +140,11 @@ Content-Type: {{ content }}
 ---
 
 (document
+  (request_section
   (variable_declaration
     name: (identifier)
     value: (value))
-  (request
+  request: (request
     method: (method)
     url: (target_url)
     header: (header
@@ -147,7 +152,7 @@ Content-Type: {{ content }}
       value: (value
         (variable
           name: (identifier))))
-    body: (json_body)))
+    body: (json_body))))
 
 
 ==================================
@@ -173,16 +178,18 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
 ---
 
 (document
+  (request_section
   (comment)
   (comment)
-  (request
+  request: (request
     method: (method)
     url: (target_url))
   (res_handler_script
-    (script))
+    (script)))
+  (request_section
   (request_separator)
-  (request
+  request: (request
     method: (method)
     url: (target_url
       (variable
-        name: (identifier)))))
+        name: (identifier))))))
