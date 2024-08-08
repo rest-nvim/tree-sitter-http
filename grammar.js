@@ -20,8 +20,11 @@ module.exports = grammar({
                 ),
             ),
         // NOTE: just for debugging purpose
+        WORD_CHAR: (_) => WORD_CHAR,
+        PUNCTUATION: (_) => PUNCTUATION,
         WS: (_) => WS,
         NL: (_) => NL,
+        LINE_TAIL: (_) => LINE_TAIL,
 
         comment: (_) => seq(token(prec(1, choice("#", "//"))), LINE_TAIL),
         request_separator: (_) => seq(token(prec(1, "###")), LINE_TAIL),
@@ -93,6 +96,7 @@ module.exports = grammar({
                             $.xml_body,
                             $.json_body,
                             $.graphql_data,
+                            $.multipart_form_data,
                         ),
                     ),
                 ),
@@ -177,7 +181,7 @@ module.exports = grammar({
 
         external_body: ($) =>
             seq(
-                "<",
+                token(prec(1, "<")),
                 optional(seq("@", field("name", $.identifier))),
                 WS,
                 field("path", $.value),
@@ -190,6 +194,23 @@ module.exports = grammar({
                 repeat(seq(optional(NL), token(prec(1, "&")), $.query_param)),
                 NL,
             ),
+
+        multipart_form_data: ($) =>
+            prec.right(seq(
+                token(prec(1, "--")),
+                choice(
+                    LINE_TAIL,
+                ),
+                repeat(
+                    choice(
+                        $._blank_line,
+                        $.comment,
+                        // TODO: `external_body` should end before `LINE_TAIL`
+                        $.external_body,
+                        LINE_TAIL,
+                    ),
+                ),
+            )),
 
         header_entity: (_) => /[\w\-]+/,
         identifier: (_) => /[A-Za-z_.\$\d\u00A1-\uFFFF-]+/,
