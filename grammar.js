@@ -14,10 +14,7 @@ module.exports = grammar({
     rules: {
         document: ($) =>
             repeat(
-                choice(
-                    prec.right(repeat1($.request_separator)),
-                    $.request_section,
-                ),
+                $.section,
             ),
         // NOTE: just for debugging purpose
         WORD_CHAR: (_) => WORD_CHAR,
@@ -72,22 +69,29 @@ module.exports = grammar({
                 ),
             ),
 
-        request_section: ($) =>
-            prec.right(seq(
-                repeat($.request_separator),
-                // NOTE: grammatically, each request section should contain only single `$.request` node
-                // we are allowing multiple `$.request` nodes here to lower the parser size
-                repeat1(
-                    choice(
-                        $._blank_line,
-                        $.comment,
-                        $.variable_declaration,
-                        $.pre_request_script,
-                        field("request", $.request),
-                        $.res_handler_script,
-                    )
-                )
+        section: ($) =>
+            prec.right(choice(
+                seq(
+                    $.request_separator,
+                    optional($._section_content),
+                ),
+                $._section_content,
             )),
+
+        // NOTE: grammatically, each request section should contain only single `$.request` node
+        // we are allowing multiple `$.request` nodes here to lower the parser size
+        _section_content: ($) =>
+            repeat1(
+                choice(
+                    $._blank_line,
+                    $.comment,
+                    $.variable_declaration,
+                    $.pre_request_script,
+                    // field to easily find request node in each section
+                    field("request", $.request),
+                    $.res_handler_script,
+                )
+            ),
 
         // LIST http verb is arbitrary and required to use vaultproject
         method: (_) =>

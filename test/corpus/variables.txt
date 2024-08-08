@@ -20,7 +20,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -49,7 +49,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   (variable_declaration
     name: (identifier)
     value: (value))
@@ -82,7 +82,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   (variable_declaration
     name: (identifier)
     value: (value))
@@ -108,7 +108,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   (variable_declaration
     name: (identifier)
     value: (value))
@@ -140,7 +140,7 @@ Content-Type: {{ content }}
 ---
 
 (document
-  (request_section
+  (section
   (variable_declaration
     name: (identifier)
     value: (value))
@@ -178,7 +178,7 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
 ---
 
 (document
-  (request_section
+  (section
   (comment)
   (comment)
   request: (request
@@ -186,7 +186,7 @@ GET https://jsonplaceholder.typicode.com/posts/{{postId}}
     url: (target_url))
   (res_handler_script
     (script)))
-  (request_section
+  (section
   (request_separator)
   request: (request
     method: (method)
