@@ -100,3 +100,44 @@ GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-cont
   request: (request
     method: (method)
     url: (target_url))))
+
+=================
+Named request
+=================
+### A First Request
+GET https://example.com/
+
+###
+# @name=A Second Request
+GET https://example.com/
+
+
+###
+# @name A Third Request
+GET https://example.com/
+
+---
+
+(document
+  (request_section
+    (request_separator
+      value: (value))
+    request: (request
+      method: (method)
+      url: (target_url)))
+  (request_section
+    (request_separator)
+    (comment
+      name: (identifier)
+      value: (value))
+    request: (request
+      method: (method)
+      url: (target_url)))
+  (request_section
+    (request_separator)
+    (comment
+      name: (identifier)
+      value: (value))
+    request: (request
+      method: (method)
+      url: (target_url))))

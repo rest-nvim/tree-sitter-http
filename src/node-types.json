@@ -2,7 +2,28 @@
   {
     "type": "comment",
     "named": true,
-    "fields": {}
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "document",
@@ -314,7 +335,18 @@
   {
     "type": "request_separator",
     "named": true,
-    "fields": {}
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "res_handler_script",
@@ -439,6 +471,10 @@
     "type": "xml_body",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "#",
+    "named": false
   },
   {
     "type": "###",
