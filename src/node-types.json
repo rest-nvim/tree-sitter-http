@@ -120,6 +120,25 @@
     "fields": {}
   },
   {
+    "type": "multipart_form_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "external_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pre_request_script",
     "named": true,
     "fields": {},
@@ -182,6 +201,10 @@
           },
           {
             "type": "json_body",
+            "named": true
+          },
+          {
+            "type": "multipart_form_data",
             "named": true
           },
           {
@@ -423,6 +446,10 @@
   },
   {
     "type": "&",
+    "named": false
+  },
+  {
+    "type": "--",
     "named": false
   },
   {
