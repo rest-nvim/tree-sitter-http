@@ -4,24 +4,8 @@
     "document": {
       "type": "REPEAT",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PREC_RIGHT",
-            "value": 0,
-            "content": {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "request_separator"
-              }
-            }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "request_section"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "section"
       }
     },
     "WORD_CHAR": {
@@ -521,54 +505,72 @@
         }
       ]
     },
-    "request_section": {
+    "section": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "REPEAT",
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "request_separator"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_section_content"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_section_content"
+          }
+        ]
+      }
+    },
+    "_section_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_blank_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "variable_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pre_request_script"
+          },
+          {
+            "type": "FIELD",
+            "name": "request",
             "content": {
               "type": "SYMBOL",
-              "name": "request_separator"
+              "name": "request"
             }
           },
           {
-            "type": "REPEAT1",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_blank_line"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "comment"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "variable_declaration"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "pre_request_script"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "request",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "request"
-                  }
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "res_handler_script"
-                }
-              ]
-            }
+            "type": "SYMBOL",
+            "name": "res_handler_script"
           }
         ]
       }

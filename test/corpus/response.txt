@@ -16,7 +16,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
