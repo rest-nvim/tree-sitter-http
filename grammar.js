@@ -26,8 +26,51 @@ module.exports = grammar({
         NL: (_) => NL,
         LINE_TAIL: (_) => LINE_TAIL,
 
-        comment: (_) => seq(token(prec(1, choice("#", "//"))), LINE_TAIL),
-        request_separator: (_) => seq(token(prec(1, "###")), LINE_TAIL),
+        comment: ($) =>
+            seq(
+                choice(
+                    repeat1(token(prec(1, "#"))),
+                    token(prec(1, seq("//", repeat("/")))),
+                ),
+                optional(token(prec(1, WS))),
+                choice(
+                    seq(
+                        token(prec(1, "@")),
+                        field("name", $.identifier),
+                        optional(
+                            seq(
+                                choice(WS, "="),
+                                optional(token(prec(1, WS))),
+                                field("value", $.value),
+                            ),
+                        ),
+                        NL,
+                    ),
+                    LINE_TAIL,
+                ),
+            ),
+        request_separator: ($) =>
+            seq(
+                token(prec(1, "###")),
+                optional(token(prec(1, WS))),
+                optional(field("value", $.value)),
+                NL,
+            ),
+        _comment_variable_declaration: ($) =>
+            seq(
+                optional(token(prec(1, WS))),
+                choice(
+                    seq(
+                        token(prec(1, "@")),
+                        field("name", $.identifier),
+                        optional(WS),
+                        "=",
+                        optional(token(prec(1, WS))),
+                        field("value", $.value),
+                    ),
+                    LINE_TAIL,
+                ),
+            ),
 
         request_section: ($) =>
             prec.right(seq(
@@ -154,7 +197,6 @@ module.exports = grammar({
                 optional(WS),
                 "=",
                 optional(token(prec(1, WS))),
-                // TODO: remove number, boolean, string to provide variable declaration with variables
                 field("value", $.value),
                 NL,
             ),
