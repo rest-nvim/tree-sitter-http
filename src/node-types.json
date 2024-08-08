@@ -34,11 +34,7 @@
       "required": false,
       "types": [
         {
-          "type": "request_section",
-          "named": true
-        },
-        {
-          "type": "request_separator",
+          "type": "section",
           "named": true
         }
       ]
@@ -291,48 +287,6 @@
     }
   },
   {
-    "type": "request_section",
-    "named": true,
-    "fields": {
-      "request": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "request",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "pre_request_script",
-          "named": true
-        },
-        {
-          "type": "request_separator",
-          "named": true
-        },
-        {
-          "type": "res_handler_script",
-          "named": true
-        },
-        {
-          "type": "variable_declaration",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "request_separator",
     "named": true,
     "fields": {
@@ -390,6 +344,48 @@
     "type": "script",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "section",
+    "named": true,
+    "fields": {
+      "request": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "request",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "pre_request_script",
+          "named": true
+        },
+        {
+          "type": "request_separator",
+          "named": true
+        },
+        {
+          "type": "res_handler_script",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "target_url",

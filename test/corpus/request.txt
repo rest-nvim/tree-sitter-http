@@ -7,7 +7,7 @@ GET http://localhost:3000/api/v1/users/all
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -22,7 +22,7 @@ GET https://neorg.org/
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -37,7 +37,7 @@ GET https://reqres.in/api/users?page=5
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -52,7 +52,7 @@ GET https://localhost:3000/api?id[]=1&id[]=2&email=foo@bar.com&statement=2+2=4
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -67,7 +67,7 @@ GET https://localhost:3000/api?page[number]=3&fields[available]&available
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -82,7 +82,7 @@ GET https://localhost:3000/api?page[number]=3&fields[available]=&available=
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -96,7 +96,7 @@ GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-cont
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url))))
@@ -111,7 +111,7 @@ GET https://example.com/
 # @name=A Second Request
 GET https://example.com/
 
-
+### not a request name
 ###
 # @name A Third Request
 GET https://example.com/
@@ -119,13 +119,13 @@ GET https://example.com/
 ---
 
 (document
-  (request_section
+  (section
     (request_separator
       value: (value))
     request: (request
       method: (method)
       url: (target_url)))
-  (request_section
+  (section
     (request_separator)
     (comment
       name: (identifier)
@@ -133,7 +133,10 @@ GET https://example.com/
     request: (request
       method: (method)
       url: (target_url)))
-  (request_section
+  (section
+    (request_separator
+      value: (value)))
+  (section
     (request_separator)
     (comment
       name: (identifier)

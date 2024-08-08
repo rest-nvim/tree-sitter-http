@@ -12,7 +12,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -38,7 +38,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -65,7 +65,7 @@ Accept: application/xml
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -116,7 +116,7 @@ query ($name: String!, $owner: String!) {
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -171,7 +171,7 @@ mutation CreateRepository($name: String!, $owner: String!) {
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -212,7 +212,7 @@ query Foo {
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -243,7 +243,7 @@ Content-Type: application/json
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
@@ -266,7 +266,7 @@ field4=value4
 ---
 
 (document
-  (request_section
+  (section
   request: (request
     method: (method)
     url: (target_url)
