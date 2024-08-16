@@ -168,9 +168,11 @@ module.exports = grammar({
                 optional(WS),
                 ":",
                 optional(token(prec(1, WS))),
-                field("value", choice(
-                    $.value,
-                )),
+                optional(
+                    field("value", choice(
+                        $.value,
+                    )),
+                ),
                 NL,
             ),
 
