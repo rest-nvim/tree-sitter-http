@@ -42,5 +42,8 @@ indent_size = 8
 trim_trailing_whitespace = false
 indent_size = 2
 
+[*.scm]
+indent_size = 2
+
 [test*]
 trim_trailing_whitespace = false
