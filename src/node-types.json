@@ -59,7 +59,7 @@
         "required": true,
         "types": [
           {
-            "type": "value",
+            "type": "path",
             "named": true
           }
         ]
@@ -67,35 +67,15 @@
     }
   },
   {
-    "type": "form_data",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "query_param",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "graphql_body",
     "named": true,
-    "fields": {}
-  },
-  {
-    "type": "graphql_data",
-    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "graphql_body",
+          "type": "graphql_data",
           "named": true
         },
         {
@@ -104,6 +84,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "graphql_data",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "header",
@@ -156,6 +141,21 @@
     }
   },
   {
+    "type": "path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pre_request_script",
     "named": true,
     "fields": {},
@@ -164,6 +164,10 @@
       "required": true,
       "types": [
         {
+          "type": "path",
+          "named": true
+        },
+        {
           "type": "script",
           "named": true
         }
@@ -171,29 +175,18 @@
     }
   },
   {
-    "type": "query_param",
+    "type": "raw_body",
     "named": true,
-    "fields": {
-      "key": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "value",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "value",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "external_body",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -205,15 +198,7 @@
         "required": false,
         "types": [
           {
-            "type": "external_body",
-            "named": true
-          },
-          {
-            "type": "form_data",
-            "named": true
-          },
-          {
-            "type": "graphql_data",
+            "type": "graphql_body",
             "named": true
           },
           {
@@ -222,6 +207,10 @@
           },
           {
             "type": "multipart_form_data",
+            "named": true
+          },
+          {
+            "type": "raw_body",
             "named": true
           },
           {
@@ -310,6 +299,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "path",
+          "named": true
+        },
         {
           "type": "script",
           "named": true
@@ -465,19 +458,7 @@
     "fields": {}
   },
   {
-    "type": "#",
-    "named": false
-  },
-  {
-    "type": "###",
-    "named": false
-  },
-  {
     "type": "%}",
-    "named": false
-  },
-  {
-    "type": "&",
     "named": false
   },
   {
@@ -505,10 +486,6 @@
     "named": false
   },
   {
-    "type": "false",
-    "named": false
-  },
-  {
     "type": "header_entity",
     "named": true
   },
@@ -525,24 +502,12 @@
     "named": true
   },
   {
-    "type": "mutation",
-    "named": false
-  },
-  {
-    "type": "query",
-    "named": false
-  },
-  {
     "type": "status_code",
     "named": true
   },
   {
     "type": "status_text",
     "named": true
-  },
-  {
-    "type": "true",
-    "named": false
   },
   {
     "type": "{%",
