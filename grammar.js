@@ -7,7 +7,7 @@ const LINE_TAIL = token(seq(/.*/, NL));
 module.exports = grammar({
     name: "http",
 
-    extras: ($) => [],
+    extras: (_) => [],
     conflicts: ($) => [[$.target_url]],
     inline: ($) => [$._target_url_line],
 
@@ -119,8 +119,8 @@ module.exports = grammar({
                 ),
             ),
 
-        status_code: ($) => /[1-5]\d{2}/,
-        status_text: ($) =>
+        status_code: (_) => /[1-5]\d{2}/,
+        status_text: (_) =>
             /(Continue|Switching Protocols|Processing|OK|Created|Accepted|Non-Authoritative Information|No Content|Reset Content|Partial Content|Multi-Status|Already Reported|IM Used|Multiple Choices|Moved Permanently|Found|See Other|Not Modified|Use Proxy|Switch Proxy|Temporary Redirect|Permanent Redirect|Bad Request|Unauthorized|Payment Required|Forbidden|Not Found|Method Not Allowed|Not Acceptable|Proxy Authentication Required|Request Timeout|Conflict|Gone|Length Required|Precondition Failed|Payload Too Large|URI Too Long|Unsupported Media Type|Range Not Satisfiable|Expectation Failed|I'm a teapot|Misdirected Request|Unprocessable Entity|Locked|Failed Dependency|Too Early|Upgrade Required|Precondition Required|Too Many Requests|Request Header Fields Too Large|Unavailable For Legal Reasons|Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)/,
         response: ($) =>
             seq($.http_version, WS, $.status_code, WS, $.status_text),
@@ -144,6 +144,8 @@ module.exports = grammar({
                             $.json_body,
                             $.graphql_data,
                             $.multipart_form_data,
+                            // TODO: raw body
+                            // $.raw_body,
                         ),
                     ),
                 ),
@@ -188,7 +190,7 @@ module.exports = grammar({
 
         pre_request_script: ($) => seq("<", WS, $.script, NL),
         res_handler_script: ($) => seq(token(prec(1, ">")), WS, $.script, NL),
-        script: ($) =>
+        script: (_) =>
             seq(
                 token(prec(1, "{%")),
                 NL,
@@ -207,13 +209,13 @@ module.exports = grammar({
                 NL,
             ),
 
-        xml_body: ($) =>
+        xml_body: (_) =>
             seq(
                 token(prec(1, /<\S/)),
                 repeat1(LINE_TAIL),
             ),
 
-        json_body: ($) =>
+        json_body: (_) =>
             seq(
                 token(prec(1, choice("{", "["))),
                 repeat1(LINE_TAIL),
