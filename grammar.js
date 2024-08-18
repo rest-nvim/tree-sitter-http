@@ -134,6 +134,7 @@ module.exports = grammar({
                                 $.xml_body,
                                 $.json_body,
                                 $.graphql_body,
+                                $._external_body,
                             ))
                         ),
                     ),
@@ -217,6 +218,11 @@ module.exports = grammar({
                 repeat1(LINE_TAIL),
             ),
 
+        _external_body: ($) =>
+            seq(
+                $.external_body,
+                NL,
+            ),
         external_body: ($) =>
             seq(
                 token(prec(2, "<")),
@@ -244,7 +250,7 @@ module.exports = grammar({
             seq(
                 choice(
                     token(prec(1, LINE_TAIL)),
-                    seq($.external_body, NL),
+                    // seq($.external_body, NL),
                     seq($._comment_prefix, $._not_comment),
                 ),
                 optional($._raw_body),

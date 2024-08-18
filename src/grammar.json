@@ -723,6 +723,10 @@
                             {
                               "type": "SYMBOL",
                               "name": "graphql_body"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "_external_body"
                             }
                           ]
                         }
@@ -1466,6 +1470,39 @@
         }
       ]
     },
+    "_external_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "external_body"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "STRING",
+                "value": "\r"
+              },
+              {
+                "type": "STRING",
+                "value": "\r\n"
+              },
+              {
+                "type": "STRING",
+                "value": "\u0000"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "external_body": {
       "type": "SEQ",
       "members": [
@@ -1682,42 +1719,6 @@
       "type": "SYMBOL",
       "name": "_raw_body"
     },
-    "_not_comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[^@]*"
-          },
-          {
-            "type": "TOKEN",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "\n"
-                },
-                {
-                  "type": "STRING",
-                  "value": "\r"
-                },
-                {
-                  "type": "STRING",
-                  "value": "\r\n"
-                },
-                {
-                  "type": "STRING",
-                  "value": "\u0000"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "_raw_body": {
       "type": "SEQ",
       "members": [
@@ -1772,39 +1773,6 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "external_body"
-                },
-                {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "\n"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "\r"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "\r\n"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "\u0000"
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
                   "name": "_comment_prefix"
                 },
                 {
@@ -1828,6 +1796,42 @@
           ]
         }
       ]
+    },
+    "_not_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^@]*"
+          },
+          {
+            "type": "TOKEN",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "\n"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\r"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\r\n"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\u0000"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     "header_entity": {
       "type": "PATTERN",
