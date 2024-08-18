@@ -250,10 +250,36 @@ Content-Type: application/json
     header: (header
       name: (header_entity)
       value: (value))
-    body: (raw_body
-      (external_body
-        path: (path))))))
+    body: (external_body
+      path: (path)))))
 
+
+===================
+Raw body text
+===================
+
+POST https://example.com/api/v1/users/new
+
+# you can't put comments
+// before the raw body
+blah
+< ./this/is/not/a/external/file.json
+blah
+# comments after the raw body
+// are also unavailable
+# @except=value declaration comments
+
+---
+
+(document
+  (section
+    request: (request
+      method: (method)
+      url: (target_url)
+      body: (raw_body))
+    (comment
+      name: (identifier)
+      value: (value))))
 
 ===========
 Form data

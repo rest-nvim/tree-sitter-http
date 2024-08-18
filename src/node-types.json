@@ -177,17 +177,7 @@
   {
     "type": "raw_body",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "external_body",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "request",
@@ -197,6 +187,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "external_body",
+            "named": true
+          },
           {
             "type": "graphql_body",
             "named": true
