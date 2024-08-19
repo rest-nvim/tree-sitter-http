@@ -491,8 +491,16 @@
               "name": "_blank_line"
             },
             {
-              "type": "SYMBOL",
-              "name": "_section_content"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_section_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -504,8 +512,16 @@
               "name": "comment"
             },
             {
-              "type": "SYMBOL",
-              "name": "_section_content"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_section_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -517,8 +533,16 @@
               "name": "variable_declaration"
             },
             {
-              "type": "SYMBOL",
-              "name": "_section_content"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_section_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -530,8 +554,16 @@
               "name": "pre_request_script"
             },
             {
-              "type": "SYMBOL",
-              "name": "_section_content"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_section_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
