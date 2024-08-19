@@ -12,6 +12,7 @@ module.exports = grammar({
     conflicts: ($) => [
         [$.target_url],
         [$._raw_body],
+        [$._section_content],
     ],
     inline: ($) => [$._target_url_line],
 
@@ -51,6 +52,21 @@ module.exports = grammar({
                     LINE_TAIL,
                 ),
             ),
+        var_comment: ($) =>
+            seq(
+                $._comment_prefix,
+                token(prec(2, "@")),
+                field("name", $.identifier),
+                optional(
+                    seq(
+                        choice(WS, "="),
+                        optional(token(prec(1, WS))),
+                        field("value", $.value),
+                    ),
+                ),
+                NL,
+            ),
+
         request_separator: ($) =>
             seq(
                 token(prec(3, /###+\p{Zs}*/)),
@@ -71,16 +87,21 @@ module.exports = grammar({
         // NOTE: grammatically, each request section should contain only single `$.request` node
         // we are allowing multiple `$.request` nodes here to lower the parser size
         _section_content: ($) =>
-            repeat1(
-                choice(
-                    $._blank_line,
-                    $.comment,
-                    $.variable_declaration,
-                    $.pre_request_script,
+            choice(
+                seq($._blank_line, $._section_content),
+                seq($.comment, $._section_content),
+                seq($.variable_declaration, $._section_content),
+                seq($.pre_request_script, $._section_content),
+                seq(
                     // field to easily find request node in each section
                     field("request", $.request),
-                    $.res_handler_script,
-                )
+                    repeat(
+                        choice(
+                            seq(alias($.var_comment, $.comment), repeat(NL)),
+                            seq($.res_handler_script, repeat(NL)),
+                        ),
+                    ),
+                ),
             ),
 
         // LIST http verb is arbitrary and required to use vaultproject
@@ -126,7 +147,8 @@ module.exports = grammar({
                 optional(
                     seq(
                         repeat1($._blank_line),
-                        repeat($.comment),
+                        // repeat($.comment),
+                        repeat(alias($.var_comment, $.comment)),
                         optional(
                             field("body", choice(
                                 $.raw_body,
