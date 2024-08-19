@@ -281,6 +281,33 @@ blah
       name: (identifier)
       value: (value))))
 
+===================
+Raw body text 2
+===================
+
+POST https://example.com/api/v1/users/new
+
+blah
+# you can't put comments
+# @except=value declaration comments
+
+---
+
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+; DO NOT CHANGE THIS TEST CASE
+; THIS IS DIFFERENT FROM ABOVE
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+(document
+  (section
+    request: (request
+      method: (method)
+      url: (target_url)
+      body: (raw_body))
+    (comment
+      name: (identifier)
+      value: (value))))
+
 ===========
 Form data
 ===========
