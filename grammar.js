@@ -88,10 +88,10 @@ module.exports = grammar({
         // we are allowing multiple `$.request` nodes here to lower the parser size
         _section_content: ($) =>
             choice(
-                seq($._blank_line, $._section_content),
-                seq($.comment, $._section_content),
-                seq($.variable_declaration, $._section_content),
-                seq($.pre_request_script, $._section_content),
+                seq($._blank_line, optional($._section_content)),
+                seq($.comment, optional($._section_content)),
+                seq($.variable_declaration, optional($._section_content)),
+                seq($.pre_request_script, optional($._section_content)),
                 seq(
                     // field to easily find request node in each section
                     field("request", $.request),
