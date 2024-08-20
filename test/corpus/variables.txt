@@ -56,6 +56,9 @@ Content-Type: application/json
   (variable_declaration
     name: (identifier)
     value: (value))
+  (variable_declaration
+    name: (identifier)
+    value: (value))
   request: (request
     method: (method)
     url: (target_url)
