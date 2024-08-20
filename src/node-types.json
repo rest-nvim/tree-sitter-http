@@ -441,10 +441,6 @@
           {
             "type": "value",
             "named": true
-          },
-          {
-            "type": "text",
-            "named": true
           }
         ]
       }

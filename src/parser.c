@@ -1071,12 +1071,12 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
   [92] = 92,
   [93] = 93,
   [94] = 94,
-  [95] = 6,
+  [95] = 95,
   [96] = 96,
   [97] = 97,
   [98] = 98,
   [99] = 99,
-  [100] = 46,
+  [100] = 100,
   [101] = 101,
   [102] = 102,
   [103] = 103,
@@ -1084,7 +1084,7 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
   [105] = 105,
   [106] = 106,
   [107] = 107,
-  [108] = 5,
+  [108] = 108,
   [109] = 109,
   [110] = 110,
   [111] = 111,
@@ -4018,24 +4018,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 620:
       if (lookahead == 's') ADVANCE(631);
       END_STATE();
-    case 615:
-      if (lookahead == 'w') ADVANCE(239);
-      END_STATE();
-    case 616:
-      if (lookahead == 'w') ADVANCE(147);
-      END_STATE();
-    case 617:
-      if (lookahead == 'x') ADVANCE(387);
-      END_STATE();
-    case 618:
-      if (lookahead == 'x') ADVANCE(621);
-      END_STATE();
-    case 619:
-      if (lookahead == 'x') ADVANCE(475);
-      END_STATE();
-    case 620:
-      if (lookahead == 'x') ADVANCE(571);
-      END_STATE();
     case 621:
       if (lookahead == 's') ADVANCE(335);
       END_STATE();
@@ -4074,42 +4056,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 633:
       if (lookahead == 't') ADVANCE(413);
-      END_STATE();
-    case 627:
-      if (lookahead == 'y') ADVANCE(67);
-      END_STATE();
-    case 628:
-      if (lookahead == 'z') ADVANCE(239);
-      END_STATE();
-    case 629:
-      if (lookahead == '{') ADVANCE(674);
-      END_STATE();
-    case 630:
-      if (lookahead == '}') ADVANCE(675);
-      END_STATE();
-    case 631:
-      if (lookahead == '\n' ||
-          lookahead == '\r') ADVANCE(660);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(641);
-      if (lookahead == '$' ||
-          lookahead == '-' ||
-          lookahead == '.' ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z') ||
-          (161 <= lookahead && lookahead <= 55295) ||
-          (57344 <= lookahead && lookahead <= 65535)) ADVANCE(707);
-      END_STATE();
-    case 632:
-      if (lookahead == '\n' ||
-          lookahead == '\r') ADVANCE(660);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(642);
-      END_STATE();
-    case 633:
-      if (lookahead == '\n' ||
-          lookahead == '\r') ADVANCE(660);
-      if (lookahead == '.' ||
-          ('0' <= lookahead && lookahead <= '9')) ADVANCE(650);
       END_STATE();
     case 634:
       if (lookahead == 't') ADVANCE(700);
