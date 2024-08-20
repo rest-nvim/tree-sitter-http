@@ -141,7 +141,8 @@ module.exports = grammar({
                 optional(seq(field("method", $.method), WS)),
                 field("url", $.target_url),
                 optional(seq(WS, field("version", $.http_version))),
-                NL, repeat($.comment),
+                NL,
+                repeat($.comment),
                 optional($.response),
                 repeat(field("header", $.header)),
                 optional(
@@ -157,7 +158,7 @@ module.exports = grammar({
                                 $.json_body,
                                 $.graphql_body,
                                 $._external_body,
-                            ))
+                            )),
                         ),
                     ),
                 ),
@@ -201,7 +202,8 @@ module.exports = grammar({
             ),
 
         pre_request_script: ($) => seq("<", WS, choice($.script, $.path), NL),
-        res_handler_script: ($) => seq(token(prec(3, ">")), WS, choice($.script, $.path), NL),
+        res_handler_script: ($) =>
+            seq(token(prec(3, ">")), WS, choice($.script, $.path), NL),
         script: (_) =>
             seq(
                 token(prec(1, "{%")),
@@ -236,7 +238,9 @@ module.exports = grammar({
         graphql_body: ($) => seq($.graphql_data, optional($.json_body)),
         graphql_data: (_) =>
             seq(
-                token(prec(2, seq(choice("query", "mutation"), WS, /.*\{/, NL))),
+                token(
+                    prec(2, seq(choice("query", "mutation"), WS, /.*\{/, NL)),
+                ),
                 repeat1(LINE_TAIL),
             ),
 
@@ -288,7 +292,7 @@ module.exports = grammar({
                     PUNCTUATION,
                     $.variable,
                     ESCAPED,
-                )
+                ),
             )),
         value: ($) =>
             repeat1(
