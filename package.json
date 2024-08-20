@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-http",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Treesitter parser for http files",
   "main": "bindings/node",
   "types": "bindings/node",
