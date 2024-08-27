@@ -971,6 +971,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "res_handler_script"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "res_redirect"
                           }
                         ]
                       }
@@ -1398,6 +1402,65 @@
             "content": {
               "type": "STRING",
               "value": "%}"
+            }
+          }
+        }
+      ]
+    },
+    "res_redirect": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 9,
+            "content": {
+              "type": "PATTERN",
+              "value": ">>!?"
+            }
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\p{Zs}+",
+          "flags": "u"
+        },
+        {
+          "type": "FIELD",
+          "name": "path",
+          "content": {
+            "type": "SYMBOL",
+            "name": "path"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\n"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "\r"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "\r\n"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "\u0000"
+                  }
+                ]
+              }
             }
           }
         }

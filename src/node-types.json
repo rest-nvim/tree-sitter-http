@@ -267,6 +267,10 @@
           "named": true
         },
         {
+          "type": "res_redirect",
+          "named": true
+        },
+        {
           "type": "response",
           "named": true
         }
@@ -306,6 +310,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "res_redirect",
+    "named": true,
+    "fields": {
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "path",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

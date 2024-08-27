@@ -144,3 +144,48 @@ GET https://example.com/
     request: (request
       method: (method)
       url: (target_url))))
+
+
+=================
+Response Redirect
+=================
+
+GET https://example.com/
+Accept: application/json
+
+>> ./response.json
+
+---
+
+(document
+  (section
+    request: (request
+      method: (method)
+      url: (target_url)
+      header: (header
+        name: (header_entity)
+        value: (value))
+      (res_redirect
+        path: (path)))))
+
+=================
+Response Redirect (Force)
+=================
+
+GET https://example.com/
+Accept: application/json
+
+>>! ./response.json
+
+---
+
+(document
+  (section
+    request: (request
+      method: (method)
+      url: (target_url)
+      header: (header
+        name: (header_entity)
+        value: (value))
+      (res_redirect
+        path: (path)))))

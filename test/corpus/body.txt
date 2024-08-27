@@ -253,16 +253,27 @@ Content-Type: application/json
     body: (external_body
       path: (path)))))
 
-=========================================
-External body file and response handler
-=========================================
+==========================================
+External body file, response handler and response redirect
+==========================================
 
 POST https://example.com/api/v1/users/new
 Content-Type: application/json
 
 < ./user.json
 
-> ./script.js
+>> ./response_file.json
+
+> ./response_script.js
+
+>>! ./another_file.json
+
+> {%
+  // this is an inline script
+  context.set_global('foo','bar');
+%}
+
+>> ./one_more_file.json
 
 ---
 
@@ -276,8 +287,17 @@ Content-Type: application/json
       value: (value))
     body: (external_body
       path: (path))
+    (res_redirect
+      path: (path))
     (res_handler_script
-      (path)))))
+      (path))
+    (res_redirect
+      path: (path))
+    (res_handler_script
+      (script))
+    (res_redirect
+      path: (path)))))
+
 
 ===================
 Raw body text

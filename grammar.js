@@ -160,6 +160,7 @@ module.exports = grammar({
                                         ),
                                         NL,
                                         $.res_handler_script,
+                                        $.res_redirect,
                                     ),
                                 ),
                             ),
@@ -211,6 +212,14 @@ module.exports = grammar({
                 NL,
                 repeat(LINE_TAIL),
                 token(prec(1, "%}")),
+            ),
+
+        res_redirect: ($) =>
+            seq(
+                token(prec(PREC.REQ_SEPARATOR, />>!?/)),
+                WS,
+                field("path", $.path),
+                token(repeat1(NL)),
             ),
 
         variable_declaration: ($) =>
