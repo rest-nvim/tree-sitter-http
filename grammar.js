@@ -198,9 +198,11 @@ module.exports = grammar({
                 token(prec(1, "}}")),
             ),
 
-        pre_request_script: ($) => seq("<", WS, choice($.script, $.path), token(repeat1(NL))),
+        pre_request_script: ($) =>
+            seq("<", WS, choice($.script, $.path), token(repeat1(NL))),
         res_handler_script: ($) =>
-            seq(token(prec(3, ">")), WS, choice($.script, $.path), token(repeat1(NL))),
+            seq(token(prec(3, ">")), WS, choice($.script, $.path),
+                token(repeat1(NL))),
         script: (_) =>
             seq(
                 token(prec(1, "{%")),
@@ -232,7 +234,8 @@ module.exports = grammar({
                 repeat1(token(prec(2, LINE_TAIL))),
             ),
 
-        graphql_body: ($) => prec.right(seq($.graphql_data, optional($.json_body))),
+        graphql_body: ($) =>
+            prec.right(seq($.graphql_data, optional($.json_body))),
         graphql_data: (_) =>
             seq(
                 token(
