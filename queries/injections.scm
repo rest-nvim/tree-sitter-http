@@ -14,12 +14,11 @@
 
 ; Script (default to javascript)
 ((#set! injection.language "javascript")
-  (comment
-    name: (_) @_name
-    (#eq? @_name "lang")
-    value: (_) @injection.language
-    )?
-  .
-  (_
-    (script) @injection.content
-    (#offset! @injection.content 0 2 0 -2)))
+(comment
+  name: (_) @_name
+  (#eq? @_name "lang")
+  value: (_) @injection.language)?
+.
+(_
+  (script) @injection.content
+  (#offset! @injection.content 0 2 0 -2)))
