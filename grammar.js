@@ -95,12 +95,6 @@ module.exports = grammar({
                 seq(
                     // field to easily find request node in each section
                     field("request", $.request),
-                    repeat(
-                        choice(
-                            seq(alias($.var_comment, $.comment), repeat(NL)),
-                            seq($.res_handler_script, repeat(NL)),
-                        ),
-                    ),
                 ),
             ),
 
@@ -148,18 +142,21 @@ module.exports = grammar({
                 optional(
                     seq(
                         repeat1($._blank_line),
-                        // repeat($.comment),
-                        repeat(alias($.var_comment, $.comment)),
-                        optional(
-                            field("body", choice(
-                                $.raw_body,
-                                $.multipart_form_data,
-                                $.xml_body,
-                                $.json_body,
-                                $.graphql_body,
-                                $._external_body,
-                            )),
-                        ),
+                        prec.right(repeat(
+                            choice(
+                                alias($.var_comment, $.comment),
+                                field("body", choice(
+                                    $.raw_body,
+                                    $.multipart_form_data,
+                                    $.xml_body,
+                                    $.json_body,
+                                    $.graphql_body,
+                                    $._external_body,
+                                )),
+                                NL,
+                                $.res_handler_script,
+                            ),
+                        )),
                     ),
                 ),
             )),
@@ -201,9 +198,9 @@ module.exports = grammar({
                 token(prec(1, "}}")),
             ),
 
-        pre_request_script: ($) => seq("<", WS, choice($.script, $.path), NL),
+        pre_request_script: ($) => seq("<", WS, choice($.script, $.path), token(repeat1(NL))),
         res_handler_script: ($) =>
-            seq(token(prec(3, ">")), WS, choice($.script, $.path), NL),
+            seq(token(prec(3, ">")), WS, choice($.script, $.path), token(repeat1(NL))),
         script: (_) =>
             seq(
                 token(prec(1, "{%")),
@@ -226,22 +223,22 @@ module.exports = grammar({
         xml_body: (_) =>
             seq(
                 token(prec(2, /<[^\s@]/)),
-                repeat1(LINE_TAIL),
+                repeat1(token(prec(2, LINE_TAIL))),
             ),
 
         json_body: (_) =>
             seq(
                 token(prec(2, /[{\[]\s+/)),
-                repeat1(LINE_TAIL),
+                repeat1(token(prec(2, LINE_TAIL))),
             ),
 
-        graphql_body: ($) => seq($.graphql_data, optional($.json_body)),
+        graphql_body: ($) => prec.right(seq($.graphql_data, optional($.json_body))),
         graphql_data: (_) =>
             seq(
                 token(
                     prec(2, seq(choice("query", "mutation"), WS, /.*\{/, NL)),
                 ),
-                repeat1(LINE_TAIL),
+                repeat1(token(prec(2, LINE_TAIL))),
             ),
 
         _external_body: ($) =>
@@ -260,13 +257,17 @@ module.exports = grammar({
         multipart_form_data: ($) =>
             prec.right(seq(
                 token(prec(2, "--")),
-                LINE_TAIL,
+                token(prec(1, LINE_TAIL)),
                 repeat(
                     choice(
-                        $._blank_line,
+                        // $._blank_line,
                         $.comment,
                         seq($.external_body, choice(WS, NL)),
+                        token(prec(2, /<[^\s@]/)),
+                        token(prec(2, "--")),
+                        token(prec(2, /[{\[]\s+/)),
                         token(prec(1, LINE_TAIL)),
+                        token(prec(2, NL)),
                     ),
                 ),
             )),
@@ -276,7 +277,6 @@ module.exports = grammar({
             seq(
                 choice(
                     token(prec(1, LINE_TAIL)),
-                    // seq($.external_body, NL),
                     seq($._comment_prefix, $._not_comment),
                 ),
                 optional($._raw_body),

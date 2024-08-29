@@ -276,10 +276,10 @@ blah
     request: (request
       method: (method)
       url: (target_url)
-      body: (raw_body))
-    (comment
-      name: (identifier)
-      value: (value))))
+      body: (raw_body)
+      (comment
+        name: (identifier)
+        value: (value)))))
 
 ===================
 Raw body text 2
@@ -303,10 +303,10 @@ blah
     request: (request
       method: (method)
       url: (target_url)
-      body: (raw_body))
-    (comment
-      name: (identifier)
-      value: (value))))
+      body: (raw_body)
+      (comment
+        name: (identifier)
+        value: (value)))))
 
 ===========
 Form data
