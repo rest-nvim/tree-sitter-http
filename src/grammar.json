@@ -1154,6 +1154,96 @@
         }
       ]
     },
+    "js_script": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "STRING",
+              "value": "{{"
+            }
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "STRING",
+                "value": "\r"
+              },
+              {
+                "type": "STRING",
+                "value": "\r\n"
+              },
+              {
+                "type": "STRING",
+                "value": "\u0000"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": ".*"
+                },
+                {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "\n"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "\r"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "\r\n"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "\u0000"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "STRING",
+              "value": "}}"
+            }
+          }
+        }
+      ]
+    },
     "variable": {
       "type": "SEQ",
       "members": [
@@ -1215,52 +1305,12 @@
         }
       ]
     },
-    "js_script": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "STRING",
-              "value": "{{"
-            }
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
-          "type": "PATTERN",
-          "name": "script_body",
-          "value": ".*"
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "STRING",
-              "value": "}}"
-            }
-          }
-        }
-      ]
-    },
     "pre_request_script": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "{{"
+          "value": "<"
         },
         {
           "type": "PATTERN",
@@ -2255,9 +2305,21 @@
     }
   },
   "extras": [],
-  "conflicts": [["target_url"], ["_raw_body"], ["_section_content"]],
+  "conflicts": [
+    [
+      "target_url"
+    ],
+    [
+      "_raw_body"
+    ],
+    [
+      "_section_content"
+    ]
+  ],
   "precedences": [],
   "externals": [],
-  "inline": ["_target_url_line"],
+  "inline": [
+    "_target_url_line"
+  ],
   "supertypes": []
 }

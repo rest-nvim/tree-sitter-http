@@ -1,0 +1,19 @@
+==================
+Pre-request js script
+==================
+
+{{
+  const foo = "bar";
+  exports.baz = foo;
+}}
+
+GET http://example.com/api/v1/users/all
+
+---
+
+(document
+  (section
+  (js_script)
+  request: (request
+    method: (method)
+    url: (target_url))))
