@@ -699,8 +699,16 @@
           "flags": "u"
         },
         {
-          "type": "SYMBOL",
-          "name": "status_text"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "status_text"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "TOKEN",
