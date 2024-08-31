@@ -1,9 +1,30 @@
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
+const PREC = {
+    VAR_COMMENT_PREFIX: 2,
+    BODY_PREFIX: 2,
+    RAW_BODY: 3,
+    GRAPQL_JSON_PREFIX: 4,
+    COMMENT_PREFIX: 5,
+    REQ_SEPARATOR: 9,
+}
+
 const WORD_CHAR = /[\p{L}\p{N}]/u;
 const PUNCTUATION = /[^\n\r\p{Z}\p{L}\p{N}]/u;
 const WS = /\p{Zs}+/u;
 const NL = token(choice("\n", "\r", "\r\n", "\0"));
 const LINE_TAIL = token(seq(/.*/, NL));
 const ESCAPED = token(/\\[^\n\r]/);
+const COMMENT_PREFIX = token(
+    prec(
+        PREC.COMMENT_PREFIX,
+        choice(
+            /#\s*/,
+            /\/\/\s*/,
+        )
+    )
+)
 
 module.exports = grammar({
     name: "http",
@@ -28,15 +49,11 @@ module.exports = grammar({
         WS: (_) => WS,
         NL: (_) => NL,
         LINE_TAIL: (_) => LINE_TAIL,
+        COMMENT_PREFIX: (_) => COMMENT_PREFIX,
 
-        _comment_prefix: (_) =>
-            choice(
-                token(prec(2, /#\s*/)),
-                token(prec(2, /\/\/\s*/)),
-            ),
         comment: ($) =>
             seq(
-                $._comment_prefix,
+                COMMENT_PREFIX,
                 choice(
                     seq(
                         token(prec(2, "@")),
@@ -55,7 +72,7 @@ module.exports = grammar({
             ),
         var_comment: ($) =>
             seq(
-                $._comment_prefix,
+                COMMENT_PREFIX,
                 token(prec(2, "@")),
                 field("name", $.identifier),
                 optional(
@@ -70,7 +87,7 @@ module.exports = grammar({
 
         request_separator: ($) =>
             seq(
-                token(prec(3, /###+\p{Zs}*/)),
+                token(prec(PREC.REQ_SEPARATOR, /###+\p{Zs}*/)),
                 optional(token(prec(1, WS))),
                 optional(field("value", $.value)),
                 NL,
@@ -203,7 +220,7 @@ module.exports = grammar({
         pre_request_script: ($) =>
             seq("<", WS, choice($.script, $.path), token(repeat1(NL))),
         res_handler_script: ($) =>
-            seq(token(prec(3, ">")), WS, choice($.script, $.path),
+            seq(token(prec(PREC.REQ_SEPARATOR, ">")), WS, choice($.script, $.path),
                 token(repeat1(NL))),
         script: (_) =>
             seq(
@@ -224,26 +241,31 @@ module.exports = grammar({
                 NL,
             ),
 
-        xml_body: (_) =>
+        xml_body: ($) =>
             seq(
-                token(prec(2, /<[^\s@]/)),
-                repeat1(token(prec(2, LINE_TAIL))),
+                token(prec(PREC.BODY_PREFIX, /<[^\s@]/)),
+                $._raw_body,
             ),
 
-        json_body: (_) =>
+        json_body: ($) =>
             seq(
-                token(prec(2, /[{\[]\s+/)),
-                repeat1(token(prec(2, LINE_TAIL))),
+                token(prec(PREC.BODY_PREFIX, /[{\[]\s+/)),
+                $._raw_body,
             ),
 
         graphql_body: ($) =>
-            prec.right(seq($.graphql_data, optional($.json_body))),
-        graphql_data: (_) =>
+            prec.right(seq($.graphql_data, optional(alias($.graphql_json_body, $.json_body)))),
+        graphql_data: ($) =>
             seq(
                 token(
-                    prec(2, seq(choice("query", "mutation"), WS, /.*\{/, NL)),
+                    prec(PREC.BODY_PREFIX, seq(choice("query", "mutation"), WS, /.*\{/, NL)),
                 ),
-                repeat1(token(prec(2, LINE_TAIL))),
+                $._raw_body,
+            ),
+        graphql_json_body: ($) =>
+            seq(
+                token(prec(PREC.GRAPQL_JSON_PREFIX, /[{\[]\s+/)),
+                $._raw_body,
             ),
 
         _external_body: ($) =>
@@ -253,7 +275,7 @@ module.exports = grammar({
             ),
         external_body: ($) =>
             seq(
-                token(prec(2, "<")),
+                token(prec(PREC.BODY_PREFIX, "<")),
                 optional(seq("@", field("name", $.identifier))),
                 WS,
                 field("path", $.path),
@@ -261,7 +283,7 @@ module.exports = grammar({
 
         multipart_form_data: ($) =>
             prec.right(seq(
-                token(prec(2, "--")),
+                token(prec(PREC.BODY_PREFIX, "--")),
                 token(prec(1, LINE_TAIL)),
                 repeat(
                     choice(
@@ -281,15 +303,15 @@ module.exports = grammar({
             seq(
                 choice(
                     token(prec(1, seq(/.+/, NL))),
-                    seq($._comment_prefix, $._not_comment),
+                    seq(COMMENT_PREFIX, $._not_comment),
                 ),
                 optional($._raw_body),
             ),
         _raw_body: ($) =>
             seq(
                 choice(
-                    token(prec(1, LINE_TAIL)),
-                    seq($._comment_prefix, $._not_comment),
+                    token(prec(PREC.RAW_BODY, LINE_TAIL)),
+                    seq(COMMENT_PREFIX, $._not_comment),
                 ),
                 optional($._raw_body),
             ),

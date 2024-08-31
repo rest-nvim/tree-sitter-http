@@ -83,39 +83,48 @@
         ]
       }
     },
-    "_comment_prefix": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 2,
-            "content": {
+    "COMMENT_PREFIX": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "PATTERN",
               "value": "#\\s*"
-            }
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 2,
-            "content": {
+            },
+            {
               "type": "PATTERN",
               "value": "\\/\\/\\s*"
             }
-          }
+          ]
         }
-      ]
+      }
     },
     "comment": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_comment_prefix"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 5,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "#\\s*"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\/\\/\\s*"
+                }
+              ]
+            }
+          }
         },
         {
           "type": "CHOICE",
@@ -267,8 +276,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_comment_prefix"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 5,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "#\\s*"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\/\\/\\s*"
+                }
+              ]
+            }
+          }
         },
         {
           "type": "TOKEN",
@@ -377,7 +402,7 @@
           "type": "TOKEN",
           "content": {
             "type": "PREC",
-            "value": 3,
+            "value": 9,
             "content": {
               "type": "PATTERN",
               "value": "###+\\p{Zs}*"
@@ -1231,7 +1256,7 @@
           "type": "TOKEN",
           "content": {
             "type": "PREC",
-            "value": 3,
+            "value": 9,
             "content": {
               "type": "STRING",
               "value": ">"
@@ -1479,50 +1504,8 @@
           }
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 2,
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": ".*"
-                    },
-                    {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\u0000"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_raw_body"
         }
       ]
     },
@@ -1541,50 +1524,8 @@
           }
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 2,
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": ".*"
-                    },
-                    {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\u0000"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_raw_body"
         }
       ]
     },
@@ -1602,8 +1543,13 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "json_body"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "graphql_json_body"
+                },
+                "named": true,
+                "value": "json_body"
               },
               {
                 "type": "BLANK"
@@ -1675,50 +1621,28 @@
           }
         },
         {
-          "type": "REPEAT1",
+          "type": "SYMBOL",
+          "name": "_raw_body"
+        }
+      ]
+    },
+    "graphql_json_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
           "content": {
-            "type": "TOKEN",
+            "type": "PREC",
+            "value": 4,
             "content": {
-              "type": "PREC",
-              "value": 2,
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": ".*"
-                    },
-                    {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\r\n"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "\u0000"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              }
+              "type": "PATTERN",
+              "value": "[{\\[]\\s+"
             }
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_raw_body"
         }
       ]
     },
@@ -2084,8 +2008,24 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "_comment_prefix"
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PREC",
+                    "value": 5,
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "#\\s*"
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "\\/\\/\\s*"
+                        }
+                      ]
+                    }
+                  }
                 },
                 {
                   "type": "SYMBOL",
@@ -2119,7 +2059,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PREC",
-                "value": 1,
+                "value": 3,
                 "content": {
                   "type": "TOKEN",
                   "content": {
@@ -2162,8 +2102,24 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "_comment_prefix"
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PREC",
+                    "value": 5,
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "#\\s*"
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "\\/\\/\\s*"
+                        }
+                      ]
+                    }
+                  }
                 },
                 {
                   "type": "SYMBOL",
@@ -2347,10 +2303,10 @@
       "target_url"
     ],
     [
-      "_raw_body"
+      "raw_body"
     ],
     [
-      "raw_body"
+      "_raw_body"
     ],
     [
       "_section_content"
