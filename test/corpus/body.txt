@@ -253,6 +253,31 @@ Content-Type: application/json
     body: (external_body
       path: (path)))))
 
+=========================================
+External body file and response handler
+=========================================
+
+POST https://example.com/api/v1/users/new
+Content-Type: application/json
+
+< ./user.json
+
+> ./script.js
+
+---
+
+(document
+  (section
+  request: (request
+    method: (method)
+    url: (target_url)
+    header: (header
+      name: (header_entity)
+      value: (value))
+    body: (external_body
+      path: (path))
+    (res_handler_script
+      (path)))))
 
 ===================
 Raw body text

@@ -11,6 +11,7 @@ module.exports = grammar({
     extras: (_) => [],
     conflicts: ($) => [
         [$.target_url],
+        [$.raw_body],
         [$._raw_body],
         [$._section_content],
     ],
@@ -276,7 +277,14 @@ module.exports = grammar({
                 ),
             )),
 
-        raw_body: ($) => $._raw_body,
+        raw_body: ($) =>
+            seq(
+                choice(
+                    token(prec(1, seq(/.+/, NL))),
+                    seq($._comment_prefix, $._not_comment),
+                ),
+                optional($._raw_body),
+            ),
         _raw_body: ($) =>
             seq(
                 choice(
