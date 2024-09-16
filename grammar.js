@@ -263,7 +263,7 @@ module.exports = grammar({
         external_body: ($) =>
             seq(
                 token(prec(PREC.BODY_PREFIX, "<")),
-                optional(seq("@", field("name", $.identifier))),
+                optional(seq("@", optional(field("name", $.identifier)))),
                 WS,
                 field("path", $.path),
             ),
