@@ -113,7 +113,7 @@ module.exports = grammar({
         http_version: (_) => token(prec(0, /HTTP\/[\d\.]+/)),
 
         _target_url_line: ($) =>
-            repeat1(choice(WORD_CHAR, PUNCTUATION, $.variable)),
+            repeat1(choice(WORD_CHAR, PUNCTUATION, $.variable, WS)),
         target_url: ($) =>
             seq($._target_url_line, repeat(seq(NL, WS, $._target_url_line))),
 

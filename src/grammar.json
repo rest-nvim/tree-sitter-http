@@ -640,6 +640,11 @@
           {
             "type": "SYMBOL",
             "name": "variable"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\p{Zs}+",
+            "flags": "u"
           }
         ]
       }
