@@ -110,7 +110,7 @@ module.exports = grammar({
         method: (_) =>
             /(OPTIONS|GET|HEAD|POST|PUT|DELETE|TRACE|CONNECT|PATCH|LIST|GRAPHQL|WEBSOCKET)/,
 
-        http_version: (_) => token(prec(0, /HTTP\/[\d\.]+/)),
+        http_version: (_) => prec.dynamic(1, token(prec(0, /HTTP\/[\d\.]+/))),
 
         _target_url_line: ($) =>
             repeat1(choice(WORD_CHAR, PUNCTUATION, $.variable, WS)),

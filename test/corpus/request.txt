@@ -101,6 +101,21 @@ GET https://github.com/rest-nvim/tree-sitter-http?tab=readme-ov-file#how-to-cont
     method: (method)
     url: (target_url))))
 
+===============================
+Request with HTTP version (#44)
+===============================
+GET https://example.comHTTP/1.1 HTTP/1.1
+
+
+---
+
+(document
+  (section
+    request: (request
+      method: (method)
+      url: (target_url)
+      version: (http_version))))
+
 =====================================
 Request with whitespace in target URI
 =====================================

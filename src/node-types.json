@@ -117,6 +117,11 @@
     }
   },
   {
+    "type": "http_version",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "json_body",
     "named": true,
     "fields": {}
@@ -501,10 +506,6 @@
   },
   {
     "type": "header_entity",
-    "named": true
-  },
-  {
-    "type": "http_version",
     "named": true
   },
   {
