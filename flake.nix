@@ -23,5 +23,14 @@
         ];
       };
     };
+
+    packages.default = pkgs.tree-sitter.buildGrammar {
+      language = "http";
+      version = "dev";
+      # TODO filter
+      src = ./.;
+      # location ? null
+      # generate ? false
+    };
   });
 }
