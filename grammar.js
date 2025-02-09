@@ -159,7 +159,7 @@ module.exports = grammar({
                     repeat(
                         choice(
                             $.comment,
-                            field("header", $.header)
+                            field("header", $.header),
                         ),
                     ),
                     optional($.__body),
