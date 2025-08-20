@@ -1,5 +1,6 @@
 node_modules
-bindings
 build
 testfile
 log.html
+target
+Cargo.lock
